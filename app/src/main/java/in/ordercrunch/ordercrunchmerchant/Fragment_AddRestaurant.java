@@ -156,7 +156,7 @@ public class Fragment_AddRestaurant extends Fragment {
 
                     mRegProgress.hide();
 
-                    Toast.makeText(getActivity(), "Cannot Add Restaurant. Please check the Internet Connection.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), task.getException().getMessage().toString(), Toast.LENGTH_LONG).show();
 
                 }
 

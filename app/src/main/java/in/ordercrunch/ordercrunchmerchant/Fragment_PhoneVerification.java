@@ -21,6 +21,7 @@ import com.google.firebase.FirebaseException;
 import com.google.firebase.FirebaseTooManyRequestsException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -77,7 +78,8 @@ public class Fragment_PhoneVerification extends Fragment {
             @Override
             public void onClick(View view) {
 
-                String phoneNumber = mPhoneText.getEditText().getText().toString();
+                String temp = mPhoneText.getEditText().getText().toString();
+                String phoneNumber = "+91"+temp;
 
 
                 if(mBtnType == 0){
@@ -87,7 +89,7 @@ public class Fragment_PhoneVerification extends Fragment {
                     mPhoneProgress.setCanceledOnTouchOutside(true);
                     mPhoneProgress.show();
 
-                    mPhoneText.setEnabled(false);
+//                    mPhoneText.setEnabled(false);
                     mMainBtn.setEnabled(false);
 
 
@@ -136,26 +138,29 @@ public class Fragment_PhoneVerification extends Fragment {
 
                 if (e instanceof FirebaseAuthInvalidCredentialsException) {
 
-                    Toast.makeText(getActivity(), "The phone number format is not valid.", Toast.LENGTH_LONG).show();
-
-                    mPhoneProgress.dismiss();
-                    mPhoneText.setEnabled(true);
-                    mMainBtn.setEnabled(true);
+                    Toast.makeText(getActivity(), e.getMessage().toString(), Toast.LENGTH_LONG).show();
                     // Invalid request
-                    // ...
+
                 } else if (e instanceof FirebaseTooManyRequestsException) {
 
-                    Toast.makeText(getActivity(), "The SMS quota for the project has been exceeded", Toast.LENGTH_LONG).show();
-
-                    mPhoneProgress.dismiss();
-                    mPhoneText.setEnabled(true);
-                    mMainBtn.setEnabled(true);
+                    Toast.makeText(getActivity(), e.getMessage().toString(), Toast.LENGTH_LONG).show();
                     // The SMS quota for the project has been exceeded
-                    // ...
+
+                } else if(e instanceof FirebaseAuthException){
+
+                    Toast.makeText(getActivity(), e.getMessage().toString(), Toast.LENGTH_LONG).show();
+
+                } else if (e instanceof FirebaseAuthInvalidCredentialsException){
+
+                    Toast.makeText(getActivity(), e.getMessage().toString(), Toast.LENGTH_LONG).show();
+
                 }
 
                 // Show a message and update the UI
                 // ...
+                mPhoneProgress.dismiss();
+                mPhoneText.setEnabled(true);
+                mMainBtn.setEnabled(true);
 
             }
 
@@ -180,7 +185,6 @@ public class Fragment_PhoneVerification extends Fragment {
 
                 // ...
             }
-
         };
 
     }
@@ -238,14 +242,21 @@ public class Fragment_PhoneVerification extends Fragment {
 
                         } else {
                             Log.w("TAG", "signInWithCredential:failure", task.getException());
+
+                            mPhoneProgress.dismiss();
+                            mVerificationCode.setEnabled(true);
+                            mMainBtn.setEnabled(true);
+
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 // The verification code entered was invalid
 
-                                Toast.makeText(getActivity(), "The verification code entered was invalid.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity(), task.getException().getMessage().toString(), Toast.LENGTH_LONG).show();
 
-                                mPhoneProgress.dismiss();
-                                mVerificationCode.setEnabled(true);
-                                mMainBtn.setEnabled(true);
+                            }
+                            if(task.getException() instanceof FirebaseAuthException){
+
+                                Toast.makeText(getActivity(), task.getException().getMessage().toString(), Toast.LENGTH_LONG).show();
+
                             }
                             // ...
                         }

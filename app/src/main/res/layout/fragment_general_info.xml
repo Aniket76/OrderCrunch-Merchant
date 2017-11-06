@@ -1,0 +1,723 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="in.ordercrunch.ordercrunchmerchant.Fragment_generalInfo">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/details_txt_intro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/josefinsans_semibold"
+                    android:lineSpacingExtra="5dp"
+                    android:text="General Information"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="24sp" />
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/details_costfortwo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/details_txt_intro"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Cost for Tow (approx.)"
+                        android:inputType="number" />
+                </android.support.design.widget.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/details_costfortwo_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/details_costfortwo"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="-8dp"
+                    android:fontFamily="@font/josefinsans_semibold"
+                    android:lineSpacingExtra="5dp"
+                    android:text="Reataurant Information"
+                    android:textColor="#9e9e9e"
+                    android:textSize="10sp" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/details_minOrder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/details_costfortwo_txt"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Minimum Order"
+                        android:inputType="number" />
+                </android.support.design.widget.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/details_minOrder_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/details_minOrder"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="-8dp"
+                    android:fontFamily="@font/josefinsans_semibold"
+                    android:lineSpacingExtra="5dp"
+                    android:text="Reataurant Information"
+                    android:textColor="#9e9e9e"
+                    android:textSize="10sp" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/details_deliveryCost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/details_minOrder_txt"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Delivery Cost"
+                        android:inputType="number" />
+                </android.support.design.widget.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/details_deliveryCost_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/details_deliveryCost"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="-8dp"
+                    android:fontFamily="@font/josefinsans_semibold"
+                    android:lineSpacingExtra="5dp"
+                    android:text="Reataurant Information"
+                    android:textColor="#9e9e9e"
+                    android:textSize="10sp" />
+
+                <RelativeLayout
+                    android:id="@+id/delivery_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/details_deliveryCost_txt"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/details_minDelivery"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="x amount"
+                            android:inputType="number" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/details_minDelivery_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/details_minDelivery"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="0dp"
+                        android:layout_marginTop="-8dp"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:lineSpacingExtra="5dp"
+                        android:text="Reataurant Information"
+                        android:textColor="#9e9e9e"
+                        android:textSize="10sp" />
+
+                </RelativeLayout>
+
+                <CheckBox
+                    android:id="@+id/delivery_checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/delivery_layout"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Delivery is FREE above x amount" />
+
+                <TextView
+                    android:id="@+id/details_tax_intro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/delivery_checkBox"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/josefinsans_semibold"
+                    android:lineSpacingExtra="5dp"
+                    android:text="Tax"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp" />
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/details_website"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/details_tax_intro"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="SGST"
+                        android:inputType="numberDecimal" />
+                </android.support.design.widget.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/details_website_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/details_website"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="-8dp"
+                    android:fontFamily="@font/josefinsans_semibold"
+                    android:lineSpacingExtra="5dp"
+                    android:text="Reataurant Information"
+                    android:textColor="#9e9e9e"
+                    android:textSize="10sp" />
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/details_phoneNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/details_website_txt"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="CGST"
+                        android:inputType="numberDecimal"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/details_phoneNumber_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/details_phoneNumber"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="-8dp"
+                    android:fontFamily="@font/josefinsans_semibold"
+                    android:lineSpacingExtra="5dp"
+                    android:text="Reataurant Information"
+                    android:textColor="#9e9e9e"
+                    android:textSize="10sp" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/details_alterPhoneNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/details_phoneNumber_txt"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Service Charges"
+                        android:inputType="numberDecimal"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/details_alterPhoneNumber_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/details_alterPhoneNumber"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="-8dp"
+                    android:fontFamily="@font/josefinsans_semibold"
+                    android:lineSpacingExtra="5dp"
+                    android:text="Reataurant Information"
+                    android:textColor="#9e9e9e"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/details_timing_intro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/details_alterPhoneNumber_txt"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/josefinsans_semibold"
+                    android:lineSpacingExtra="5dp"
+                    android:text="Timing"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:id="@+id/mon_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/details_timing_intro"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:text="MON:"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/mon_open"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Opening"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:gravity="center"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_gravity="center"
+                        android:textSize="24sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="24sp"
+                        android:gravity="center"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:layout_gravity="center"
+                        android:text="to"/>
+
+                    <TextView
+                        android:id="@+id/mon_close"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Closing"
+                        android:textColor="@color/colorPrimary"
+                        android:gravity="center"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:layout_gravity="center"
+                        android:textSize="24sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tue_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/mon_layout"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:text="TUE:"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/tue_open"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Opening"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:gravity="center"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_gravity="center"
+                        android:textSize="24sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="24sp"
+                        android:gravity="center"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:layout_gravity="center"
+                        android:text="to"/>
+
+                    <TextView
+                        android:id="@+id/tue_close"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Closing"
+                        android:textColor="@color/colorPrimary"
+                        android:gravity="center"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:layout_gravity="center"
+                        android:textSize="24sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/wed_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tue_layout"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:text="WED:"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/wed_open"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Opening"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:gravity="center"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_gravity="center"
+                        android:textSize="24sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="24sp"
+                        android:gravity="center"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:layout_gravity="center"
+                        android:text="to"/>
+
+                    <TextView
+                        android:id="@+id/wed_close"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Closing"
+                        android:textColor="@color/colorPrimary"
+                        android:gravity="center"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:layout_gravity="center"
+                        android:textSize="24sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/thu_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/wed_layout"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:text="THU:"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/thu_open"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Opening"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:gravity="center"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_gravity="center"
+                        android:textSize="24sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="24sp"
+                        android:gravity="center"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:layout_gravity="center"
+                        android:text="to"/>
+
+                    <TextView
+                        android:id="@+id/thu_close"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Closing"
+                        android:textColor="@color/colorPrimary"
+                        android:gravity="center"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:layout_gravity="center"
+                        android:textSize="24sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/fri_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/thu_layout"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:text="FRI:"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/fri_open"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Opening"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:gravity="center"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_gravity="center"
+                        android:textSize="24sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="24sp"
+                        android:gravity="center"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:layout_gravity="center"
+                        android:text="to"/>
+
+                    <TextView
+                        android:id="@+id/fri_close"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Closing"
+                        android:textColor="@color/colorPrimary"
+                        android:gravity="center"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:layout_gravity="center"
+                        android:textSize="24sp"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/sat_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/fri_layout"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:text="SAT:"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/sat_open"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Opening"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:gravity="center"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_gravity="center"
+                        android:textSize="24sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="24sp"
+                        android:gravity="center"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:layout_gravity="center"
+                        android:text="to"/>
+
+                    <TextView
+                        android:id="@+id/sat_close"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Closing"
+                        android:textColor="@color/colorPrimary"
+                        android:gravity="center"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:layout_gravity="center"
+                        android:textSize="24sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/sun_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/sat_layout"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:text="SUN:"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/sun_open"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Opening"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:gravity="center"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_gravity="center"
+                        android:textSize="24sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="24sp"
+                        android:gravity="center"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:layout_gravity="center"
+                        android:text="to"/>
+
+                    <TextView
+                        android:id="@+id/sun_close"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Closing"
+                        android:textColor="@color/colorPrimary"
+                        android:gravity="center"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:layout_gravity="center"
+                        android:textSize="24sp"/>
+
+                </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/week_checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/sun_layout"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:checked="true"
+                    android:text="Timing is SAME for all seven days" />
+
+
+                <Button
+                    android:id="@+id/btn_addInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/week_checkBox"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/colorAccent"
+                    android:text="Add Info"
+                    android:textColor="#ffffff" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

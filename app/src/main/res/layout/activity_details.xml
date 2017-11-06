@@ -4,14 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/details_activity_layout"
     tools:context="in.ordercrunch.ordercrunchmerchant.DetailsActivity">
 
-    <Button
-        android:id="@+id/button_mainActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="59dp"
-        android:text="Move To Main Activity" />
+
 </RelativeLayout>
