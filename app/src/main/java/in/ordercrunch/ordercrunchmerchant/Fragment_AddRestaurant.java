@@ -38,8 +38,11 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 
@@ -55,9 +58,8 @@ public class Fragment_AddRestaurant extends Fragment {
     private Button mCreateBtn;
 
     private ProgressDialog mRegProgress;
-
     private FirebaseAuth mAuth;
-
+    private DocumentReference mDocRef;
 
     public Fragment_AddRestaurant() {
         // Required empty public constructor
@@ -98,6 +100,7 @@ public class Fragment_AddRestaurant extends Fragment {
                 String email = mEmail.getEditText().getText().toString();
                 String password = mPassword.getEditText().getText().toString();
                 String repassword = mRetypePassword.getEditText().getText().toString();
+                String blank_string = "";
 
 
                 if (password.equals(repassword)) {
@@ -106,10 +109,10 @@ public class Fragment_AddRestaurant extends Fragment {
 
                         mRegProgress.setTitle("Registering User");
                         mRegProgress.setMessage("Please wait while we create your Account.");
-                        mRegProgress.setCanceledOnTouchOutside(true);
+                        mRegProgress.setCanceledOnTouchOutside(false);
                         mRegProgress.show();
 
-                        register_user(Restaurant_name, email, password);
+                        register_user(Restaurant_name, email, password, blank_string);
 
                     } else {
 
@@ -132,7 +135,7 @@ public class Fragment_AddRestaurant extends Fragment {
 
     }
 
-    private void register_user(final String restaurant_name, String email, String password) {
+    private void register_user(final String restaurant_name, final String email, String password, final String blank) {
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -140,16 +143,57 @@ public class Fragment_AddRestaurant extends Fragment {
 
                 if (task.isSuccessful()) {
 
-                    mRegProgress.dismiss();
+                    FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+                    String uid = current_user.getUid();
 
-                    Fragment_PhoneVerification fragment = new Fragment_PhoneVerification();
-                    FragmentManager manager = getFragmentManager();
-                    FragmentTransaction transaction = manager.beginTransaction();
-                    transaction.replace(R.id.start_avtivity_layout,fragment,"Fragment PhoneVerification");
-                    transaction.addToBackStack(null);
-                    transaction.setReorderingAllowed(true);
-                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
-                    transaction.commit();
+                    Map<String, Object> restaurant = new HashMap<>();
+                    restaurant.put("name", restaurant_name);
+                    restaurant.put("tagLine", blank);
+                    restaurant.put("email", email);
+                    restaurant.put("website", blank);
+                    restaurant.put("phoneNumber", blank);
+                    restaurant.put("alternativePhoneNumber", blank);
+                    restaurant.put("cuisines", blank);
+                    restaurant.put("dineIn", false);
+                    restaurant.put("takeAway", false);
+                    restaurant.put("homeDelivery", false);
+                    restaurant.put("onTheGo", false);
+                    //-----address------
+                    restaurant.put("shopNo",blank);
+                    //-----INFO--------
+                    restaurant.put("costForTwo",blank);
+
+                    mDocRef = FirebaseFirestore.getInstance().collection("restaurant").document(uid);
+
+                    mDocRef.set(restaurant).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                            if(task.isSuccessful()){
+
+                                mRegProgress.dismiss();
+
+                                Fragment_PhoneVerification fragment = new Fragment_PhoneVerification();
+                                FragmentManager manager = getFragmentManager();
+                                FragmentTransaction transaction = manager.beginTransaction();
+                                transaction.replace(R.id.start_avtivity_layout,fragment,"Fragment PhoneVerification");
+                                transaction.addToBackStack(null);
+                                transaction.setReorderingAllowed(true);
+                                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+                                transaction.commit();
+
+                            }
+
+                            else {
+
+                                mRegProgress.dismiss();
+
+                                Toast.makeText(getActivity(),task.getException().getMessage().toString(),Toast.LENGTH_LONG).show();
+
+                            }
+
+                        }
+                    });
 
 
                 } else {

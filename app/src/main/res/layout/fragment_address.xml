@@ -32,7 +32,7 @@
                     android:textSize="24sp" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/details_shopno"
+                    android:id="@+id/address_shopno"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/details_address_txt"
@@ -44,31 +44,31 @@
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Shop no, Street"
+                        android:hint="Shop no, Street *"
                         android:inputType="textCapWords|textPostalAddress"
                         />
 
                 </android.support.design.widget.TextInputLayout>
 
                 <TextView
-                    android:id="@+id/details_shopno_txt"
+                    android:id="@+id/address_shopno_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/details_shopno"
-                    android:layout_marginLeft="20dp"
+                    android:layout_below="@+id/address_shopno"
+                    android:layout_marginLeft="28dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="-8dp"
                     android:fontFamily="@font/josefinsans_semibold"
                     android:lineSpacingExtra="5dp"
-                    android:text="Reataurant Information"
+                    android:text="Ex. : 555/A, D. H. Road"
                     android:textColor="#9e9e9e"
                     android:textSize="10sp" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/details_location"
+                    android:id="@+id/address_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/details_shopno_txt"
+                    android:layout_below="@+id/address_shopno_txt"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
@@ -77,30 +77,30 @@
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Location"
+                        android:hint="Location *"
                         android:inputType="textCapWords"
                         />
                 </android.support.design.widget.TextInputLayout>
 
                 <TextView
-                    android:id="@+id/details_location_txt"
+                    android:id="@+id/address_location_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/details_location"
-                    android:layout_marginLeft="20dp"
+                    android:layout_below="@+id/address_location"
+                    android:layout_marginLeft="28dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="-8dp"
                     android:fontFamily="@font/josefinsans_semibold"
                     android:lineSpacingExtra="5dp"
-                    android:text="Reataurant Information"
+                    android:text="Ex. : Behala"
                     android:textColor="#9e9e9e"
                     android:textSize="10sp" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/details_landmark"
+                    android:id="@+id/address_landmark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/details_location_txt"
+                    android:layout_below="@+id/address_location_txt"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
@@ -114,24 +114,24 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <TextView
-                    android:id="@+id/details_landmark_txt"
+                    android:id="@+id/address_landmark_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/details_landmark"
-                    android:layout_marginLeft="20dp"
+                    android:layout_below="@+id/address_landmark"
+                    android:layout_marginLeft="28dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="-8dp"
                     android:fontFamily="@font/josefinsans_semibold"
                     android:lineSpacingExtra="5dp"
-                    android:text="Reataurant Information"
+                    android:text="Ex.: Opp. Behala Blind School"
                     android:textColor="#9e9e9e"
                     android:textSize="10sp" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/details_pin"
+                    android:id="@+id/address_pinCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/details_landmark_txt"
+                    android:layout_below="@+id/address_landmark_txt"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
@@ -140,50 +140,90 @@
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="PinCode"
+                        android:hint="PinCode *"
                         android:inputType="number"
                         android:maxLength="6" />
                 </android.support.design.widget.TextInputLayout>
 
                 <TextView
-                    android:id="@+id/details_pin_txt"
+                    android:id="@+id/address_pin_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/details_pin"
-                    android:layout_marginLeft="20dp"
+                    android:layout_below="@+id/address_pinCode"
+                    android:layout_marginLeft="28dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="-8dp"
                     android:fontFamily="@font/josefinsans_semibold"
                     android:lineSpacingExtra="5dp"
-                    android:text="Reataurant Information"
+                    android:text="Ex. : 700034"
+                    android:textColor="#9e9e9e"
+                    android:textSize="10sp" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/address_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/address_pin_txt"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="City *"
+                        android:text="Kolkata"
+                        android:inputType="textCapWords"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/address_city_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/address_city"
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="-8dp"
+                    android:fontFamily="@font/josefinsans_semibold"
+                    android:lineSpacingExtra="5dp"
+                    android:text="We are NOT operating in any other city right now."
                     android:textColor="#9e9e9e"
                     android:textSize="10sp" />
 
 
-                <LinearLayout
-                    android:id="@+id/address_linear"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/address_state"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/details_pin_txt"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="15dp">
+                    android:layout_below="@+id/address_city_txt"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp">
 
-                    <Spinner
-                        android:id="@+id/state_spinner"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_weight="1" />
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="State *"
+                        android:text="West Bengal"
+                        android:inputType="textCapWords"/>
+                </android.support.design.widget.TextInputLayout>
 
-                    <Spinner
-                        android:id="@+id/city_spinner"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_weight="1" />
+                <TextView
+                    android:id="@+id/address_state_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/address_state"
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="-8dp"
+                    android:fontFamily="@font/josefinsans_semibold"
+                    android:lineSpacingExtra="5dp"
+                    android:text="We are NOT operating in any other State right now."
+                    android:textColor="#9e9e9e"
+                    android:textSize="10sp" />
 
-                </LinearLayout>
 
                 <Button
                     android:id="@+id/btn_addAddress"
@@ -191,7 +231,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_below="@+id/address_linear"
+                    android:layout_below="@+id/address_state_txt"
                     android:layout_marginBottom="15dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="20dp"

@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.FirebaseTooManyRequestsException;
@@ -26,6 +28,9 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.concurrent.TimeUnit;
 
@@ -38,12 +43,16 @@ public class Fragment_PhoneVerification extends Fragment {
     private TextInputLayout mPhoneText;
     private TextInputLayout mVerificationCode;
     private Button mMainBtn;
+    private String phoneNumber;
 
     private ProgressDialog mPhoneProgress;
 
     private FirebaseAuth mAuth;
 
-    private int mBtnType=0;
+    private DocumentReference mDocRef;
+    private String databasePhone;
+
+    private int mBtnType = 0;
 
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     private String mVerificationId;
@@ -59,6 +68,7 @@ public class Fragment_PhoneVerification extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_phone_verification, container, false);
     }
 
@@ -66,23 +76,57 @@ public class Fragment_PhoneVerification extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mPhoneText = (TextInputLayout)getActivity().findViewById(R.id.phone_phone);
-        mVerificationCode = (TextInputLayout)getActivity().findViewById(R.id.phone_otp);
-        mMainBtn = (Button)getActivity().findViewById(R.id.phone_main_btn);
+        mPhoneProgress = new ProgressDialog(getContext());
+
+        mPhoneProgress.setTitle("Retrieving Data");
+        mPhoneProgress.setMessage("Please wait while we retrieve the Data");
+        mPhoneProgress.setCanceledOnTouchOutside(true);
+        mPhoneProgress.show();
+
+        mPhoneText = (TextInputLayout) getActivity().findViewById(R.id.phone_phone);
+        mVerificationCode = (TextInputLayout) getActivity().findViewById(R.id.phone_otp);
+        mMainBtn = (Button) getActivity().findViewById(R.id.phone_main_btn);
 
         mAuth = FirebaseAuth.getInstance();
 
-        mPhoneProgress = new ProgressDialog(getContext());
+        FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = current_user.getUid();
+
+        mDocRef = FirebaseFirestore.getInstance().collection("restaurant").document(uid);
+
+        mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+
+                    databasePhone = documentSnapshot.getString("phoneNumber");
+
+                    if(databasePhone == ""){
+
+                        mPhoneProgress.dismiss();
+                        Toast.makeText(getActivity(),"Phone Number is not Linked. Please enter your phone number.", Toast.LENGTH_LONG).show();
+
+                    }else {
+
+                        mPhoneProgress.dismiss();
+                        mPhoneText.getEditText().setText(databasePhone);
+
+                    }
+
+                }
+            }
+        });
+
 
         mMainBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 String temp = mPhoneText.getEditText().getText().toString();
-                String phoneNumber = "+91"+temp;
+                phoneNumber = "+91" + temp;
 
 
-                if(mBtnType == 0){
+                if (mBtnType == 0) {
 
                     mPhoneProgress.setTitle("Sending Code");
                     mPhoneProgress.setMessage("Please wait while we send the Verification code");
@@ -100,8 +144,7 @@ public class Fragment_PhoneVerification extends Fragment {
                             getActivity(),               // Activity (for callback binding)
                             mCallbacks);
 
-                }
-                else {
+                } else {
 
                     mMainBtn.setEnabled(false);
                     mVerificationCode.setEnabled(false);
@@ -146,11 +189,11 @@ public class Fragment_PhoneVerification extends Fragment {
                     Toast.makeText(getActivity(), e.getMessage().toString(), Toast.LENGTH_LONG).show();
                     // The SMS quota for the project has been exceeded
 
-                } else if(e instanceof FirebaseAuthException){
+                } else if (e instanceof FirebaseAuthException) {
 
                     Toast.makeText(getActivity(), e.getMessage().toString(), Toast.LENGTH_LONG).show();
 
-                } else if (e instanceof FirebaseAuthInvalidCredentialsException){
+                } else if (e instanceof FirebaseAuthInvalidCredentialsException) {
 
                     Toast.makeText(getActivity(), e.getMessage().toString(), Toast.LENGTH_LONG).show();
 
@@ -233,12 +276,27 @@ public class Fragment_PhoneVerification extends Fragment {
                             FirebaseUser user = task.getResult().getUser();
                             // ...
 
-                            mPhoneProgress.dismiss();
+                            mDocRef.update("phoneNumber", phoneNumber).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
 
-                            Intent mainIntent = new Intent(getActivity(), DetailsActivity.class);
-                            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(mainIntent);
-                            getActivity().finish();
+                                    mPhoneProgress.dismiss();
+
+                                    Intent mainIntent = new Intent(getActivity(), DetailsActivity.class);
+                                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(mainIntent);
+                                    getActivity().finish();
+
+                                }
+                            })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+
+                                            Toast.makeText(getActivity(),e.getMessage().toString(),Toast.LENGTH_LONG).show();
+
+                                        }
+                                    });
 
                         } else {
                             Log.w("TAG", "signInWithCredential:failure", task.getException());
@@ -253,7 +311,7 @@ public class Fragment_PhoneVerification extends Fragment {
                                 Toast.makeText(getActivity(), task.getException().getMessage().toString(), Toast.LENGTH_LONG).show();
 
                             }
-                            if(task.getException() instanceof FirebaseAuthException){
+                            if (task.getException() instanceof FirebaseAuthException) {
 
                                 Toast.makeText(getActivity(), task.getException().getMessage().toString(), Toast.LENGTH_LONG).show();
 

@@ -18,7 +18,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/details_txt_intro"
+                    android:id="@+id/info_txt_intro"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -33,10 +33,10 @@
 
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/details_costfortwo"
+                    android:id="@+id/info_costfortwo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/details_txt_intro"
+                    android:layout_below="@+id/info_txt_intro"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
@@ -45,29 +45,29 @@
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Cost for Tow (approx.)"
+                        android:hint="Cost for Two (approx.) *"
                         android:inputType="number" />
                 </android.support.design.widget.TextInputLayout>
 
                 <TextView
-                    android:id="@+id/details_costfortwo_txt"
+                    android:id="@+id/info_costfortwo_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/details_costfortwo"
-                    android:layout_marginLeft="20dp"
+                    android:layout_below="@+id/info_costfortwo"
+                    android:layout_marginLeft="28dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="-8dp"
                     android:fontFamily="@font/josefinsans_semibold"
                     android:lineSpacingExtra="5dp"
-                    android:text="Reataurant Information"
+                    android:text="Average cost for tow person. Ex. : 500"
                     android:textColor="#9e9e9e"
                     android:textSize="10sp" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/details_minOrder"
+                    android:id="@+id/info_minOrder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/details_costfortwo_txt"
+                    android:layout_below="@+id/info_costfortwo_txt"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
@@ -81,24 +81,24 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <TextView
-                    android:id="@+id/details_minOrder_txt"
+                    android:id="@+id/info_minOrder_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/details_minOrder"
-                    android:layout_marginLeft="20dp"
+                    android:layout_below="@+id/info_minOrder"
+                    android:layout_marginLeft="28dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="-8dp"
                     android:fontFamily="@font/josefinsans_semibold"
                     android:lineSpacingExtra="5dp"
-                    android:text="Reataurant Information"
+                    android:text="Minimum order cost for Home Delivery. Ex. : 99"
                     android:textColor="#9e9e9e"
                     android:textSize="10sp" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/details_deliveryCost"
+                    android:id="@+id/info_deliveryCost"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/details_minOrder_txt"
+                    android:layout_below="@+id/info_minOrder_txt"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
@@ -112,24 +112,24 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <TextView
-                    android:id="@+id/details_deliveryCost_txt"
+                    android:id="@+id/info_deliveryCost_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/details_deliveryCost"
-                    android:layout_marginLeft="20dp"
+                    android:layout_below="@+id/info_deliveryCost"
+                    android:layout_marginLeft="28dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="-8dp"
                     android:fontFamily="@font/josefinsans_semibold"
                     android:lineSpacingExtra="5dp"
-                    android:text="Reataurant Information"
+                    android:text="Ex. : 25"
                     android:textColor="#9e9e9e"
                     android:textSize="10sp" />
 
                 <RelativeLayout
-                    android:id="@+id/delivery_layout"
+                    android:id="@+id/info_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/details_deliveryCost_txt"
+                    android:layout_below="@+id/info_deliveryCost_txt"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
@@ -137,7 +137,7 @@
                     android:visibility="gone">
 
                     <android.support.design.widget.TextInputLayout
-                        android:id="@+id/details_minDelivery"
+                        android:id="@+id/info_minDelivery"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -149,16 +149,16 @@
                     </android.support.design.widget.TextInputLayout>
 
                     <TextView
-                        android:id="@+id/details_minDelivery_txt"
+                        android:id="@+id/info_minDelivery_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/details_minDelivery"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="0dp"
+                        android:layout_below="@+id/info_minDelivery"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="4dp"
                         android:layout_marginTop="-8dp"
                         android:fontFamily="@font/josefinsans_semibold"
                         android:lineSpacingExtra="5dp"
-                        android:text="Reataurant Information"
+                        android:text="Home delivery will be FREE above this amount. Ex. : 250"
                         android:textColor="#9e9e9e"
                         android:textSize="10sp" />
 
@@ -168,14 +168,14 @@
                     android:id="@+id/delivery_checkBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/delivery_layout"
+                    android:layout_below="@+id/info_layout"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
                     android:text="Delivery is FREE above x amount" />
 
                 <TextView
-                    android:id="@+id/details_tax_intro"
+                    android:id="@+id/info_tax_intro"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/delivery_checkBox"
@@ -190,10 +190,10 @@
 
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/details_website"
+                    android:id="@+id/info_sgst"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/details_tax_intro"
+                    android:layout_below="@+id/info_tax_intro"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
@@ -207,25 +207,25 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <TextView
-                    android:id="@+id/details_website_txt"
+                    android:id="@+id/info_sgst_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/details_website"
-                    android:layout_marginLeft="20dp"
+                    android:layout_below="@+id/info_sgst"
+                    android:layout_marginLeft="28dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="-8dp"
                     android:fontFamily="@font/josefinsans_semibold"
                     android:lineSpacingExtra="5dp"
-                    android:text="Reataurant Information"
+                    android:text="Don't give the percent (%) symbol in the end. Ex. : 9.00"
                     android:textColor="#9e9e9e"
                     android:textSize="10sp" />
 
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/details_phoneNumber"
+                    android:id="@+id/info_cgst"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/details_website_txt"
+                    android:layout_below="@+id/info_sgst_txt"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
@@ -235,28 +235,28 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="CGST"
-                        android:inputType="numberDecimal"/>
+                        android:inputType="numberDecimal" />
                 </android.support.design.widget.TextInputLayout>
 
                 <TextView
-                    android:id="@+id/details_phoneNumber_txt"
+                    android:id="@+id/info_cgst_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/details_phoneNumber"
-                    android:layout_marginLeft="20dp"
+                    android:layout_below="@+id/info_cgst"
+                    android:layout_marginLeft="28dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="-8dp"
                     android:fontFamily="@font/josefinsans_semibold"
                     android:lineSpacingExtra="5dp"
-                    android:text="Reataurant Information"
+                    android:text="Write the value only. Ex. : 9.00"
                     android:textColor="#9e9e9e"
                     android:textSize="10sp" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/details_alterPhoneNumber"
+                    android:id="@+id/info_serviseCharges"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/details_phoneNumber_txt"
+                    android:layout_below="@+id/info_cgst_txt"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
@@ -266,28 +266,28 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Service Charges"
-                        android:inputType="numberDecimal"/>
+                        android:inputType="numberDecimal" />
                 </android.support.design.widget.TextInputLayout>
 
                 <TextView
-                    android:id="@+id/details_alterPhoneNumber_txt"
+                    android:id="@+id/info_serviseCharges_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/details_alterPhoneNumber"
-                    android:layout_marginLeft="20dp"
+                    android:layout_below="@+id/info_serviseCharges"
+                    android:layout_marginLeft="28dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="-8dp"
                     android:fontFamily="@font/josefinsans_semibold"
                     android:lineSpacingExtra="5dp"
-                    android:text="Reataurant Information"
+                    android:text="Keep it blank, if you don't apply it additionaly. Ex. : 2.5"
                     android:textColor="#9e9e9e"
                     android:textSize="10sp" />
 
                 <TextView
-                    android:id="@+id/details_timing_intro"
+                    android:id="@+id/info_timing_intro"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/details_alterPhoneNumber_txt"
+                    android:layout_below="@+id/info_serviseCharges_txt"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="30dp"
@@ -301,11 +301,17 @@
                     android:id="@+id/mon_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/details_timing_intro"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_below="@+id/info_timing_intro"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/mon_cb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -314,40 +320,40 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/josefinsans_semibold"
                         android:text="MON:"
-                        android:textSize="20dp" />
+                        android:textSize="18dp" />
 
                     <TextView
                         android:id="@+id/mon_open"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="2"
-                        android:text="Opening"
                         android:fontFamily="@font/josefinsans_semibold"
                         android:gravity="center"
+                        android:text="Opening"
                         android:textColor="@color/colorPrimary"
-                        android:layout_gravity="center"
-                        android:textSize="24sp"/>
+                        android:textSize="20sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="24sp"
-                        android:gravity="center"
-                        android:fontFamily="@font/josefinsans_semibold"
                         android:layout_gravity="center"
-                        android:text="to"/>
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:gravity="center"
+                        android:text="to"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/mon_close"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="2"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:gravity="center"
                         android:text="Closing"
                         android:textColor="@color/colorPrimary"
-                        android:gravity="center"
-                        android:fontFamily="@font/josefinsans_semibold"
-                        android:layout_gravity="center"
-                        android:textSize="24sp"/>
+                        android:textSize="20sp" />
 
                 </LinearLayout>
 
@@ -356,12 +362,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/mon_layout"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
-                    android:visibility="gone"
-                    >
+                    android:visibility="gone">
+
+                    <CheckBox
+                        android:id="@+id/tue_cb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -370,40 +381,40 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/josefinsans_semibold"
                         android:text="TUE:"
-                        android:textSize="20dp" />
+                        android:textSize="18dp" />
 
                     <TextView
                         android:id="@+id/tue_open"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="2"
-                        android:text="Opening"
                         android:fontFamily="@font/josefinsans_semibold"
                         android:gravity="center"
+                        android:text="Opening"
                         android:textColor="@color/colorPrimary"
-                        android:layout_gravity="center"
-                        android:textSize="24sp"/>
+                        android:textSize="20sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="24sp"
-                        android:gravity="center"
-                        android:fontFamily="@font/josefinsans_semibold"
                         android:layout_gravity="center"
-                        android:text="to"/>
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:gravity="center"
+                        android:text="to"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/tue_close"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="2"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:gravity="center"
                         android:text="Closing"
                         android:textColor="@color/colorPrimary"
-                        android:gravity="center"
-                        android:fontFamily="@font/josefinsans_semibold"
-                        android:layout_gravity="center"
-                        android:textSize="24sp"/>
+                        android:textSize="20sp" />
 
                 </LinearLayout>
 
@@ -412,12 +423,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tue_layout"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
-                    android:visibility="gone"
-                    >
+                    android:visibility="gone">
+
+                    <CheckBox
+                        android:id="@+id/wed_cb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -426,40 +442,40 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/josefinsans_semibold"
                         android:text="WED:"
-                        android:textSize="20dp" />
+                        android:textSize="18dp" />
 
                     <TextView
                         android:id="@+id/wed_open"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="2"
-                        android:text="Opening"
                         android:fontFamily="@font/josefinsans_semibold"
                         android:gravity="center"
+                        android:text="Opening"
                         android:textColor="@color/colorPrimary"
-                        android:layout_gravity="center"
-                        android:textSize="24sp"/>
+                        android:textSize="20sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="24sp"
-                        android:gravity="center"
-                        android:fontFamily="@font/josefinsans_semibold"
                         android:layout_gravity="center"
-                        android:text="to"/>
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:gravity="center"
+                        android:text="to"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/wed_close"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="2"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:gravity="center"
                         android:text="Closing"
                         android:textColor="@color/colorPrimary"
-                        android:gravity="center"
-                        android:fontFamily="@font/josefinsans_semibold"
-                        android:layout_gravity="center"
-                        android:textSize="24sp"/>
+                        android:textSize="20sp" />
 
                 </LinearLayout>
 
@@ -468,12 +484,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/wed_layout"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
-                    android:visibility="gone"
-                    >
+                    android:visibility="gone">
+
+                    <CheckBox
+                        android:id="@+id/thu_cb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -482,40 +503,40 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/josefinsans_semibold"
                         android:text="THU:"
-                        android:textSize="20dp" />
+                        android:textSize="18dp" />
 
                     <TextView
                         android:id="@+id/thu_open"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="2"
-                        android:text="Opening"
                         android:fontFamily="@font/josefinsans_semibold"
                         android:gravity="center"
+                        android:text="Opening"
                         android:textColor="@color/colorPrimary"
-                        android:layout_gravity="center"
-                        android:textSize="24sp"/>
+                        android:textSize="20sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="24sp"
-                        android:gravity="center"
-                        android:fontFamily="@font/josefinsans_semibold"
                         android:layout_gravity="center"
-                        android:text="to"/>
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:gravity="center"
+                        android:text="to"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/thu_close"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="2"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:gravity="center"
                         android:text="Closing"
                         android:textColor="@color/colorPrimary"
-                        android:gravity="center"
-                        android:fontFamily="@font/josefinsans_semibold"
-                        android:layout_gravity="center"
-                        android:textSize="24sp"/>
+                        android:textSize="20sp" />
 
                 </LinearLayout>
 
@@ -524,12 +545,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/thu_layout"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
-                    android:visibility="gone"
-                    >
+                    android:visibility="gone">
+
+                    <CheckBox
+                        android:id="@+id/fri_cb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -538,40 +564,40 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/josefinsans_semibold"
                         android:text="FRI:"
-                        android:textSize="20dp" />
+                        android:textSize="18dp" />
 
                     <TextView
                         android:id="@+id/fri_open"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="2"
-                        android:text="Opening"
                         android:fontFamily="@font/josefinsans_semibold"
                         android:gravity="center"
+                        android:text="Opening"
                         android:textColor="@color/colorPrimary"
-                        android:layout_gravity="center"
-                        android:textSize="24sp"/>
+                        android:textSize="20sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="24sp"
-                        android:gravity="center"
-                        android:fontFamily="@font/josefinsans_semibold"
                         android:layout_gravity="center"
-                        android:text="to"/>
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:gravity="center"
+                        android:text="to"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/fri_close"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="2"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:gravity="center"
                         android:text="Closing"
                         android:textColor="@color/colorPrimary"
-                        android:gravity="center"
-                        android:fontFamily="@font/josefinsans_semibold"
-                        android:layout_gravity="center"
-                        android:textSize="24sp"/>
+                        android:textSize="20sp" />
 
                 </LinearLayout>
 
@@ -581,12 +607,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/fri_layout"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
-                    android:visibility="gone"
-                    >
+                    android:visibility="gone">
+
+                    <CheckBox
+                        android:id="@+id/sat_cb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -595,40 +626,40 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/josefinsans_semibold"
                         android:text="SAT:"
-                        android:textSize="20dp" />
+                        android:textSize="18dp" />
 
                     <TextView
                         android:id="@+id/sat_open"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="2"
-                        android:text="Opening"
                         android:fontFamily="@font/josefinsans_semibold"
                         android:gravity="center"
+                        android:text="Opening"
                         android:textColor="@color/colorPrimary"
-                        android:layout_gravity="center"
-                        android:textSize="24sp"/>
+                        android:textSize="20sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="24sp"
-                        android:gravity="center"
-                        android:fontFamily="@font/josefinsans_semibold"
                         android:layout_gravity="center"
-                        android:text="to"/>
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:gravity="center"
+                        android:text="to"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/sat_close"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="2"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:gravity="center"
                         android:text="Closing"
                         android:textColor="@color/colorPrimary"
-                        android:gravity="center"
-                        android:fontFamily="@font/josefinsans_semibold"
-                        android:layout_gravity="center"
-                        android:textSize="24sp"/>
+                        android:textSize="20sp" />
 
                 </LinearLayout>
 
@@ -637,12 +668,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/sat_layout"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
-                    android:visibility="gone"
-                    >
+                    android:visibility="gone">
+
+                    <CheckBox
+                        android:id="@+id/sun_cb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -651,50 +687,65 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/josefinsans_semibold"
                         android:text="SUN:"
-                        android:textSize="20dp" />
+                        android:textSize="18dp" />
 
                     <TextView
                         android:id="@+id/sun_open"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="2"
-                        android:text="Opening"
                         android:fontFamily="@font/josefinsans_semibold"
                         android:gravity="center"
+                        android:text="Opening"
                         android:textColor="@color/colorPrimary"
-                        android:layout_gravity="center"
-                        android:textSize="24sp"/>
+                        android:textSize="20sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="24sp"
-                        android:gravity="center"
-                        android:fontFamily="@font/josefinsans_semibold"
                         android:layout_gravity="center"
-                        android:text="to"/>
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:gravity="center"
+                        android:text="to"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/sun_close"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="2"
+                        android:fontFamily="@font/josefinsans_semibold"
+                        android:gravity="center"
                         android:text="Closing"
                         android:textColor="@color/colorPrimary"
-                        android:gravity="center"
-                        android:fontFamily="@font/josefinsans_semibold"
-                        android:layout_gravity="center"
-                        android:textSize="24sp"/>
+                        android:textSize="20sp" />
 
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/timing_msg_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/sun_layout"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/josefinsans_regular"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:lineSpacingExtra="5dp"
+                    android:text="If the restaurant is closed on a perticular day then just UNCHECKED it."/>
 
                 <CheckBox
                     android:id="@+id/week_checkBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/sun_layout"
+                    android:layout_below="@+id/timing_msg_txt"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginRight="16dp"
                     android:layout_marginTop="10dp"
                     android:checked="true"
                     android:text="Timing is SAME for all seven days" />
