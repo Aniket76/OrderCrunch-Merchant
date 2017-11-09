@@ -2,6 +2,7 @@ package in.ordercrunch.ordercrunchmerchant;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -50,7 +52,6 @@ public class Fragment_PhoneVerification extends Fragment {
     private FirebaseAuth mAuth;
 
     private DocumentReference mDocRef;
-    private String databasePhone;
 
     private int mBtnType = 0;
 
@@ -78,11 +79,6 @@ public class Fragment_PhoneVerification extends Fragment {
 
         mPhoneProgress = new ProgressDialog(getContext());
 
-        mPhoneProgress.setTitle("Retrieving Data");
-        mPhoneProgress.setMessage("Please wait while we retrieve the Data");
-        mPhoneProgress.setCanceledOnTouchOutside(true);
-        mPhoneProgress.show();
-
         mPhoneText = (TextInputLayout) getActivity().findViewById(R.id.phone_phone);
         mVerificationCode = (TextInputLayout) getActivity().findViewById(R.id.phone_otp);
         mMainBtn = (Button) getActivity().findViewById(R.id.phone_main_btn);
@@ -94,33 +90,12 @@ public class Fragment_PhoneVerification extends Fragment {
 
         mDocRef = FirebaseFirestore.getInstance().collection("restaurant").document(uid);
 
-        mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
-
-                    databasePhone = documentSnapshot.getString("phoneNumber");
-
-                    if(databasePhone == ""){
-
-                        mPhoneProgress.dismiss();
-                        Toast.makeText(getActivity(),"Phone Number is not Linked. Please enter your phone number.", Toast.LENGTH_LONG).show();
-
-                    }else {
-
-                        mPhoneProgress.dismiss();
-                        mPhoneText.getEditText().setText(databasePhone);
-
-                    }
-
-                }
-            }
-        });
-
-
         mMainBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
                 String temp = mPhoneText.getEditText().getText().toString();
                 phoneNumber = "+91" + temp;

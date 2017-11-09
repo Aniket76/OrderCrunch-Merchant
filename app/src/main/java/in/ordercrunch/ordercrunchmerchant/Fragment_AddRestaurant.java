@@ -3,6 +3,7 @@ package in.ordercrunch.ordercrunchmerchant;
 
 import android.app.ActionBar;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -23,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -96,6 +98,9 @@ public class Fragment_AddRestaurant extends Fragment {
             @Override
             public void onClick(View view) {
 
+                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
                 String Restaurant_name = mRestaurantName.getEditText().getText().toString();
                 String email = mEmail.getEditText().getText().toString();
                 String password = mPassword.getEditText().getText().toString();
@@ -105,7 +110,7 @@ public class Fragment_AddRestaurant extends Fragment {
 
                 if (password.equals(repassword)) {
 
-                    if (!TextUtils.isEmpty(Restaurant_name) || !TextUtils.isEmpty(email) || !TextUtils.isEmpty(password)) {
+                    if (!TextUtils.isEmpty(Restaurant_name) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
 
                         mRegProgress.setTitle("Registering User");
                         mRegProgress.setMessage("Please wait while we create your Account.");
@@ -147,7 +152,7 @@ public class Fragment_AddRestaurant extends Fragment {
                     String uid = current_user.getUid();
 
                     Map<String, Object> restaurant = new HashMap<>();
-                    restaurant.put("name", restaurant_name);
+                    restaurant.put("aaName", restaurant_name);
                     restaurant.put("tagLine", blank);
                     restaurant.put("email", email);
                     restaurant.put("website", blank);
@@ -160,6 +165,8 @@ public class Fragment_AddRestaurant extends Fragment {
                     restaurant.put("onTheGo", false);
                     //-----address------
                     restaurant.put("shopNo",blank);
+                    restaurant.put("city","Kolkata");
+                    restaurant.put("state","West Bengal");
                     //-----INFO--------
                     restaurant.put("costForTwo",blank);
 
@@ -181,6 +188,11 @@ public class Fragment_AddRestaurant extends Fragment {
                                 transaction.setReorderingAllowed(true);
                                 transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
                                 transaction.commit();
+
+//                                Intent mainIntent = new Intent(getActivity(), DetailsActivity.class);
+//                                mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                startActivity(mainIntent);
+//                                getActivity().finish();
 
                             }
 

@@ -38,7 +38,7 @@ public class Fragment_Login extends Fragment {
 
     private TextInputLayout mEmail;
     private TextInputLayout mPassword;
-    private Button mLoginBtn;
+    private Button mLoginBtn,demo;
     private TextView mForgetPass;
 
     private ProgressDialog mRegProgress;
@@ -72,7 +72,17 @@ public class Fragment_Login extends Fragment {
         mEmail = (TextInputLayout)getActivity().findViewById(R.id.login_email);
         mPassword = (TextInputLayout)getActivity().findViewById(R.id.login_password);
         mLoginBtn = (Button)getActivity().findViewById(R.id.login_btn);
+        demo = (Button)getActivity().findViewById(R.id.demo);
         mForgetPass = (TextView) getActivity().findViewById(R.id.login_forgotpass);
+
+        demo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Toast.makeText(getActivity(),getActivity().getClass().getSimpleName().toString(),Toast.LENGTH_LONG).show();
+
+            }
+        });
 
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,7 +162,7 @@ public class Fragment_Login extends Fragment {
                                     }else {
 
                                         mRegProgress.dismiss();
-                                        Toast.makeText(getActivity(),"Unknown error accrued. Please try again",Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getActivity(),task.getException().getMessage().toString(),Toast.LENGTH_LONG).show();
 
                                     }
                                 }

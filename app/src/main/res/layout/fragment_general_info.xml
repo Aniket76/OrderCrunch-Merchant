@@ -293,7 +293,7 @@
                     android:layout_marginTop="30dp"
                     android:fontFamily="@font/josefinsans_semibold"
                     android:lineSpacingExtra="5dp"
-                    android:text="Timing"
+                    android:text="Timing *"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp" />
 
@@ -735,9 +735,8 @@
                     android:fontFamily="@font/josefinsans_regular"
                     android:textSize="18sp"
                     android:gravity="center"
-                    android:visibility="gone"
                     android:lineSpacingExtra="5dp"
-                    android:text="If the restaurant is closed on a perticular day then just UNCHECKED it."/>
+                    android:text="To SET the timing please click on Opening and Closing text writen above."/>
 
                 <CheckBox
                     android:id="@+id/week_checkBox"

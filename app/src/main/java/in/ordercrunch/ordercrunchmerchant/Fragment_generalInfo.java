@@ -4,6 +4,7 @@ package in.ordercrunch.ordercrunchmerchant;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
@@ -48,22 +50,24 @@ import java.util.Map;
 public class Fragment_generalInfo extends Fragment {
 
     private Button mGeneralInfoBtn;
-    private CheckBox mWeekCheckBox,mDeliveryCheckBox;
+    private CheckBox mWeekCheckBox, mDeliveryCheckBox;
 
     private TextInputLayout mCostForTwo, mMinOrder, mDeliveryCost, mXAmount, mSgst, mCgst, mServiceCharges;
 
-    private LinearLayout mMonLayout,mTueLayout,mWedLayout,mThuLayout,mFriLayout,mSatLayout,mSunLayout;
+    private LinearLayout mMonLayout, mTueLayout, mWedLayout, mThuLayout, mFriLayout, mSatLayout, mSunLayout;
     private RelativeLayout mDeliveryLatout;
 
-    private TextView mMonOpen,mMonClose,mTueOpen,mTueClose,mWedOpen,mWedClose,mThuOpen,mThuClose,mFriOpen,mFriClose,mSatOpen,mSatClose,mSunOpen,mSunClose;
+    private TextView mMonOpen, mMonClose, mTueOpen, mTueClose, mWedOpen, mWedClose, mThuOpen, mThuClose, mFriOpen, mFriClose, mSatOpen, mSatClose, mSunOpen, mSunClose;
     private TextView mTimingMsg;
-    private CheckBox mMonCB,mTueCB,mWedCB,mThuCB,mFriCB,mSatCB,mSunCB;
+    private CheckBox mMonCB, mTueCB, mWedCB, mThuCB, mFriCB, mSatCB, mSunCB;
 
     private ProgressDialog mMainProgress;
     private FirebaseAuth mAuth;
     private DocumentReference mDocRef;
 
-    private int hour,minute;
+    private String activityNameCheck;
+
+    private int hour, minute;
 
     public Fragment_generalInfo() {
         // Required empty public constructor
@@ -81,54 +85,51 @@ public class Fragment_generalInfo extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        activityNameCheck = getActivity().getClass().getSimpleName().toString();
+
         mMainProgress = new ProgressDialog(getContext());
 
-        mMainProgress.setTitle("Retrieving Data");
-        mMainProgress.setMessage("Please wait while we retrieve the Data");
-        mMainProgress.setCanceledOnTouchOutside(true);
-        mMainProgress.show();
+        mGeneralInfoBtn = (Button) getActivity().findViewById(R.id.btn_addInfo);
 
-        mGeneralInfoBtn = (Button)getActivity().findViewById(R.id.btn_addInfo);
+        mWeekCheckBox = (CheckBox) getActivity().findViewById(R.id.week_checkBox);
+        mDeliveryCheckBox = (CheckBox) getActivity().findViewById(R.id.delivery_checkBox);
 
-        mWeekCheckBox = (CheckBox)getActivity().findViewById(R.id.week_checkBox);
-        mDeliveryCheckBox=(CheckBox)getActivity().findViewById(R.id.delivery_checkBox);
+        mCostForTwo = (TextInputLayout) getActivity().findViewById(R.id.info_costfortwo);
+        mMinOrder = (TextInputLayout) getActivity().findViewById(R.id.info_minOrder);
+        mDeliveryCost = (TextInputLayout) getActivity().findViewById(R.id.info_deliveryCost);
+        mXAmount = (TextInputLayout) getActivity().findViewById(R.id.info_minDelivery);
+        mSgst = (TextInputLayout) getActivity().findViewById(R.id.info_sgst);
+        mCgst = (TextInputLayout) getActivity().findViewById(R.id.info_cgst);
+        mServiceCharges = (TextInputLayout) getActivity().findViewById(R.id.info_serviseCharges);
 
-        mCostForTwo = (TextInputLayout)getActivity().findViewById(R.id.info_costfortwo);
-        mMinOrder = (TextInputLayout)getActivity().findViewById(R.id.info_minOrder);
-        mDeliveryCost = (TextInputLayout)getActivity().findViewById(R.id.info_deliveryCost);
-        mXAmount = (TextInputLayout)getActivity().findViewById(R.id.info_minDelivery);
-        mSgst = (TextInputLayout)getActivity().findViewById(R.id.info_sgst);
-        mCgst = (TextInputLayout)getActivity().findViewById(R.id.info_cgst);
-        mServiceCharges = (TextInputLayout)getActivity().findViewById(R.id.info_serviseCharges);
+        mMonLayout = (LinearLayout) getActivity().findViewById(R.id.mon_layout);
+        mTueLayout = (LinearLayout) getActivity().findViewById(R.id.tue_layout);
+        mWedLayout = (LinearLayout) getActivity().findViewById(R.id.wed_layout);
+        mThuLayout = (LinearLayout) getActivity().findViewById(R.id.thu_layout);
+        mFriLayout = (LinearLayout) getActivity().findViewById(R.id.fri_layout);
+        mSatLayout = (LinearLayout) getActivity().findViewById(R.id.sat_layout);
+        mSunLayout = (LinearLayout) getActivity().findViewById(R.id.sun_layout);
 
-        mMonLayout = (LinearLayout)getActivity().findViewById(R.id.mon_layout);
-        mTueLayout = (LinearLayout)getActivity().findViewById(R.id.tue_layout);
-        mWedLayout = (LinearLayout)getActivity().findViewById(R.id.wed_layout);
-        mThuLayout = (LinearLayout)getActivity().findViewById(R.id.thu_layout);
-        mFriLayout = (LinearLayout)getActivity().findViewById(R.id.fri_layout);
-        mSatLayout = (LinearLayout)getActivity().findViewById(R.id.sat_layout);
-        mSunLayout = (LinearLayout)getActivity().findViewById(R.id.sun_layout);
+        mDeliveryLatout = (RelativeLayout) getActivity().findViewById(R.id.info_layout);
 
-        mDeliveryLatout = (RelativeLayout)getActivity().findViewById(R.id.info_layout);
-
-        mTimingMsg = (TextView)getActivity().findViewById(R.id.timing_msg_txt);
+        mTimingMsg = (TextView) getActivity().findViewById(R.id.timing_msg_txt);
 
         //-------Monday Timing----------
-        mMonOpen = (TextView)getActivity().findViewById(R.id.mon_open);
-        mMonClose = (TextView)getActivity().findViewById(R.id.mon_close);
-        mMonCB = (CheckBox)getActivity().findViewById(R.id.mon_cb);
+        mMonOpen = (TextView) getActivity().findViewById(R.id.mon_open);
+        mMonClose = (TextView) getActivity().findViewById(R.id.mon_close);
+        mMonCB = (CheckBox) getActivity().findViewById(R.id.mon_cb);
 
         mMonCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mMonCB.isChecked()){
+                if (mMonCB.isChecked()) {
                     mMonOpen.setText("Opening");
                     mMonClose.setText("Closing");
                     mMonOpen.setEnabled(true);
                     mMonClose.setEnabled(true);
                     mMonOpen.setTextColor(Color.parseColor("#212121"));
                     mMonClose.setTextColor(Color.parseColor("#212121"));
-                }else {
+                } else {
                     mMonOpen.setText("0:0");
                     mMonClose.setText("0:0");
                     mMonOpen.setEnabled(false);
@@ -153,21 +154,21 @@ public class Fragment_generalInfo extends Fragment {
         });
 
         //-------Tuesday Timing----------
-        mTueOpen = (TextView)getActivity().findViewById(R.id.tue_open);
-        mTueClose = (TextView)getActivity().findViewById(R.id.tue_close);
-        mTueCB = (CheckBox)getActivity().findViewById(R.id.tue_cb);
+        mTueOpen = (TextView) getActivity().findViewById(R.id.tue_open);
+        mTueClose = (TextView) getActivity().findViewById(R.id.tue_close);
+        mTueCB = (CheckBox) getActivity().findViewById(R.id.tue_cb);
 
         mTueCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mTueCB.isChecked()){
+                if (mTueCB.isChecked()) {
                     mTueOpen.setText("Opening");
                     mTueClose.setText("Closing");
                     mTueOpen.setEnabled(true);
                     mTueClose.setEnabled(true);
                     mTueOpen.setTextColor(Color.parseColor("#212121"));
                     mTueClose.setTextColor(Color.parseColor("#212121"));
-                }else {
+                } else {
                     mTueOpen.setText("0:0");
                     mTueClose.setText("0:0");
                     mTueOpen.setEnabled(false);
@@ -192,21 +193,21 @@ public class Fragment_generalInfo extends Fragment {
         });
 
         //-------Wednesday Timing----------
-        mWedOpen = (TextView)getActivity().findViewById(R.id.wed_open);
-        mWedClose = (TextView)getActivity().findViewById(R.id.wed_close);
-        mWedCB = (CheckBox)getActivity().findViewById(R.id.wed_cb);
+        mWedOpen = (TextView) getActivity().findViewById(R.id.wed_open);
+        mWedClose = (TextView) getActivity().findViewById(R.id.wed_close);
+        mWedCB = (CheckBox) getActivity().findViewById(R.id.wed_cb);
 
         mWedCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mWedCB.isChecked()){
+                if (mWedCB.isChecked()) {
                     mWedOpen.setText("Opening");
                     mWedClose.setText("Closing");
                     mWedOpen.setEnabled(true);
                     mWedClose.setEnabled(true);
                     mWedOpen.setTextColor(Color.parseColor("#212121"));
                     mWedClose.setTextColor(Color.parseColor("#212121"));
-                }else {
+                } else {
                     mWedOpen.setText("0:0");
                     mWedClose.setText("0:0");
                     mWedOpen.setEnabled(false);
@@ -231,21 +232,21 @@ public class Fragment_generalInfo extends Fragment {
         });
 
         //-------Thuresday Timing----------
-        mThuOpen = (TextView)getActivity().findViewById(R.id.thu_open);
-        mThuClose = (TextView)getActivity().findViewById(R.id.thu_close);
-        mThuCB = (CheckBox)getActivity().findViewById(R.id.thu_cb);
+        mThuOpen = (TextView) getActivity().findViewById(R.id.thu_open);
+        mThuClose = (TextView) getActivity().findViewById(R.id.thu_close);
+        mThuCB = (CheckBox) getActivity().findViewById(R.id.thu_cb);
 
         mThuCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mThuCB.isChecked()){
+                if (mThuCB.isChecked()) {
                     mThuOpen.setText("Opening");
                     mThuClose.setText("Closing");
                     mThuOpen.setEnabled(true);
                     mThuClose.setEnabled(true);
                     mThuOpen.setTextColor(Color.parseColor("#212121"));
                     mThuClose.setTextColor(Color.parseColor("#212121"));
-                }else {
+                } else {
                     mThuOpen.setText("0:0");
                     mThuClose.setText("0:0");
                     mThuOpen.setEnabled(false);
@@ -270,21 +271,21 @@ public class Fragment_generalInfo extends Fragment {
         });
 
         //-------Friday Timing----------
-        mFriOpen = (TextView)getActivity().findViewById(R.id.fri_open);
-        mFriClose = (TextView)getActivity().findViewById(R.id.fri_close);
-        mFriCB = (CheckBox)getActivity().findViewById(R.id.fri_cb);
+        mFriOpen = (TextView) getActivity().findViewById(R.id.fri_open);
+        mFriClose = (TextView) getActivity().findViewById(R.id.fri_close);
+        mFriCB = (CheckBox) getActivity().findViewById(R.id.fri_cb);
 
         mFriCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mFriCB.isChecked()){
+                if (mFriCB.isChecked()) {
                     mFriOpen.setText("Opening");
                     mFriClose.setText("Closing");
                     mFriOpen.setEnabled(true);
                     mFriClose.setEnabled(true);
                     mFriOpen.setTextColor(Color.parseColor("#212121"));
                     mFriClose.setTextColor(Color.parseColor("#212121"));
-                }else {
+                } else {
                     mFriOpen.setText("0:0");
                     mFriClose.setText("0:0");
                     mFriOpen.setEnabled(false);
@@ -309,21 +310,21 @@ public class Fragment_generalInfo extends Fragment {
         });
 
         //-------Saturday Timing----------
-        mSatOpen = (TextView)getActivity().findViewById(R.id.sat_open);
-        mSatClose = (TextView)getActivity().findViewById(R.id.sat_close);
-        mSatCB = (CheckBox)getActivity().findViewById(R.id.sat_cb);
+        mSatOpen = (TextView) getActivity().findViewById(R.id.sat_open);
+        mSatClose = (TextView) getActivity().findViewById(R.id.sat_close);
+        mSatCB = (CheckBox) getActivity().findViewById(R.id.sat_cb);
 
         mSatCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mSatCB.isChecked()){
+                if (mSatCB.isChecked()) {
                     mSatOpen.setText("Opening");
                     mSatClose.setText("Closing");
                     mSatOpen.setEnabled(true);
                     mSatClose.setEnabled(true);
                     mSatOpen.setTextColor(Color.parseColor("#212121"));
                     mSatClose.setTextColor(Color.parseColor("#212121"));
-                }else {
+                } else {
                     mSatOpen.setText("0:0");
                     mSatClose.setText("0:0");
                     mSatOpen.setEnabled(false);
@@ -348,21 +349,21 @@ public class Fragment_generalInfo extends Fragment {
         });
 
         //-------Sunday Timing----------
-        mSunOpen = (TextView)getActivity().findViewById(R.id.sun_open);
-        mSunClose = (TextView)getActivity().findViewById(R.id.sun_close);
-        mSunCB = (CheckBox)getActivity().findViewById(R.id.sun_cb);
+        mSunOpen = (TextView) getActivity().findViewById(R.id.sun_open);
+        mSunClose = (TextView) getActivity().findViewById(R.id.sun_close);
+        mSunCB = (CheckBox) getActivity().findViewById(R.id.sun_cb);
 
         mSunCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mSunCB.isChecked()){
+                if (mSunCB.isChecked()) {
                     mSunOpen.setText("Opening");
                     mSunClose.setText("Closing");
                     mSunOpen.setEnabled(true);
                     mSunClose.setEnabled(true);
                     mSunOpen.setTextColor(Color.parseColor("#212121"));
                     mSunClose.setTextColor(Color.parseColor("#212121"));
-                }else {
+                } else {
                     mSunOpen.setText("0:0");
                     mSunClose.setText("0:0");
                     mSunOpen.setEnabled(false);
@@ -391,7 +392,7 @@ public class Fragment_generalInfo extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if(!(mWeekCheckBox.isChecked())){
+                if (!(mWeekCheckBox.isChecked())) {
 
 //                    mMonLayout.setVisibility(View.VISIBLE);
                     mTueLayout.setVisibility(View.VISIBLE);
@@ -400,9 +401,9 @@ public class Fragment_generalInfo extends Fragment {
                     mFriLayout.setVisibility(View.VISIBLE);
                     mSatLayout.setVisibility(View.VISIBLE);
                     mSunLayout.setVisibility(View.VISIBLE);
-                    mTimingMsg.setVisibility(View.VISIBLE);
+                    mTimingMsg.setText("If the restaurant is closed on a perticular day then just UNCHECKED it.");
 
-                }else {
+                } else {
 
 //                    mMonLayout.setVisibility(View.GONE);
                     mTueLayout.setVisibility(View.GONE);
@@ -411,7 +412,7 @@ public class Fragment_generalInfo extends Fragment {
                     mFriLayout.setVisibility(View.GONE);
                     mSatLayout.setVisibility(View.GONE);
                     mSunLayout.setVisibility(View.GONE);
-                    mTimingMsg.setVisibility(View.GONE);
+                    mTimingMsg.setText("To SET the timing please click on Opening and Closing text writen above.");
 
                 }
 
@@ -422,11 +423,11 @@ public class Fragment_generalInfo extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if(mDeliveryCheckBox.isChecked()){
+                if (mDeliveryCheckBox.isChecked()) {
 
                     mDeliveryLatout.setVisibility(View.VISIBLE);
 
-                }else {
+                } else {
 
                     mDeliveryLatout.setVisibility(View.GONE);
 
@@ -442,23 +443,15 @@ public class Fragment_generalInfo extends Fragment {
 
         mDocRef = FirebaseFirestore.getInstance().collection("restaurant").document(uid);
 
-        mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
+        if (activityNameCheck.equals("MainActivity")) {
 
-                if (documentSnapshot.exists()){
+            mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
 
-                    String dbCostForTwo = documentSnapshot.getString("costForTwo");
+                    if (documentSnapshot.exists()) {
 
-                    if (dbCostForTwo == ""){
-
-                        mMainProgress.dismiss();
-                        Toast.makeText(getActivity(),"No Data found please fill the form",Toast.LENGTH_LONG).show();
-
-                    }else {
-
-                        mMainProgress.dismiss();
-
+                        String dbCostForTwo = documentSnapshot.getString("costForTwo");
                         String dbMinOrder = documentSnapshot.getString("minOrder");
                         String dbDeliveryCost = documentSnapshot.getString("deliveryCost");
                         String dbXAmount = documentSnapshot.getString("xAmount");
@@ -480,6 +473,16 @@ public class Fragment_generalInfo extends Fragment {
                         String dbSatClose = documentSnapshot.getString("satClose");
                         String dbSunOpen = documentSnapshot.getString("sunOpen");
                         String dbSunClose = documentSnapshot.getString("sunClose");
+
+                        Boolean dbDeliveryCB = documentSnapshot.getBoolean("deliveryCB");
+                        Boolean dbWeekCB = documentSnapshot.getBoolean("weekCB");
+                        Boolean dbmonCB = documentSnapshot.getBoolean("monCB");
+                        Boolean dbtueCB = documentSnapshot.getBoolean("tueCB");
+                        Boolean dbwedCB = documentSnapshot.getBoolean("wedCB");
+                        Boolean dbthuCB = documentSnapshot.getBoolean("thuCB");
+                        Boolean dbfriCB = documentSnapshot.getBoolean("friCB");
+                        Boolean dbsatCB = documentSnapshot.getBoolean("satCB");
+                        Boolean dbsunCB = documentSnapshot.getBoolean("sunCB");
 
                         mCostForTwo.getEditText().setText(dbCostForTwo);
                         mMinOrder.getEditText().setText(dbMinOrder);
@@ -504,30 +507,85 @@ public class Fragment_generalInfo extends Fragment {
                         mSunOpen.setText(dbSunOpen);
                         mSunClose.setText(dbSunClose);
 
+                        if (dbDeliveryCB == true)
+                            mDeliveryCheckBox.setChecked(true);
+                        else
+                            mDeliveryCheckBox.setChecked(false);
+
+                        if (dbWeekCB == true)
+                            mWeekCheckBox.setChecked(true);
+                        else
+                            mWeekCheckBox.setChecked(false);
+
+                        if (dbmonCB == true)
+                            mMonCB.setChecked(true);
+                        else
+                            mMonCB.setChecked(false);
+
+                        if (dbtueCB == true)
+                            mTueCB.setChecked(true);
+                        else
+                            mTueCB.setChecked(false);
+
+                        if (dbwedCB == true)
+                            mWedCB.setChecked(true);
+                        else
+                            mWedCB.setChecked(false);
+
+                        if (dbthuCB == true)
+                            mThuCB.setChecked(true);
+                        else
+                            mThuCB.setChecked(false);
+
+                        if (dbfriCB == true)
+                            mFriCB.setChecked(true);
+                        else
+                            mFriCB.setChecked(false);
+
+                        if (dbsatCB == true)
+                            mSatCB.setChecked(true);
+                        else
+                            mSatCB.setChecked(false);
+
+                        if (dbsunCB == true)
+                            mSunCB.setChecked(true);
+                        else
+                            mSunCB.setChecked(false);
+
+                        mMainProgress.dismiss();
+
                     }
 
                 }
 
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
+            })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
 
-                        mMainProgress.dismiss();
-                        Toast.makeText(getActivity(),e.getMessage().toString(),Toast.LENGTH_LONG).show();
+                            mMainProgress.dismiss();
+                            Toast.makeText(getActivity(), e.getMessage().toString(), Toast.LENGTH_LONG).show();
 
-                    }
-                });
+                        }
+                    });
 
-        mGeneralInfoBtn.setOnClickListener(new View.OnClickListener() {
+        } else
+
+        {
+
+            Toast.makeText(getActivity(), "No Data found please fill the form", Toast.LENGTH_LONG).show();
+
+        }
+
+
+        mGeneralInfoBtn.setOnClickListener(new View.OnClickListener()
+
+        {
             @Override
             public void onClick(View view) {
 
-                mMainProgress.setTitle("Saving Data");
-                mMainProgress.setMessage("Please wait while we save the Data");
-                mMainProgress.setCanceledOnTouchOutside(true);
-                mMainProgress.show();
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
                 String costForTwo = mCostForTwo.getEditText().getText().toString();
                 String minOrder = mMinOrder.getEditText().getText().toString();
@@ -552,9 +610,68 @@ public class Fragment_generalInfo extends Fragment {
                 String sunOpen = mSunOpen.getText().toString();
                 String sunClose = mSunClose.getText().toString();
 
+                Boolean deliveryCB;
+                Boolean weekCB;
+                Boolean monCB;
+                Boolean tueCB;
+                Boolean wedCB;
+                Boolean thuCB;
+                Boolean friCB;
+                Boolean satCB;
+                Boolean sunCB;
 
-                if (!TextUtils.isEmpty(costForTwo))
-                {
+                if (mDeliveryCheckBox.isChecked())
+                    deliveryCB = true;
+                else
+                    deliveryCB = false;
+
+                if (mWeekCheckBox.isChecked())
+                    weekCB = true;
+                else
+                    weekCB = false;
+
+                if (mMonCB.isChecked())
+                    monCB = true;
+                else
+                    monCB = false;
+
+                if (mTueCB.isChecked())
+                    tueCB = true;
+                else
+                    tueCB = false;
+
+                if (mWedCB.isChecked())
+                    wedCB = true;
+                else
+                    wedCB = false;
+
+                if (mThuCB.isChecked())
+                    thuCB = true;
+                else
+                    thuCB = false;
+
+                if (mFriCB.isChecked())
+                    friCB = true;
+                else
+                    friCB = false;
+
+                if (mSatCB.isChecked())
+                    satCB = true;
+                else
+                    satCB = false;
+
+                if (mSunCB.isChecked())
+                    sunCB = true;
+                else
+                    sunCB = false;
+
+
+                if (!TextUtils.isEmpty(costForTwo) && !monOpen.equals("Opening") && !monClose.equals("Closing")) {
+
+                    mMainProgress.setTitle("Saving Data");
+                    mMainProgress.setMessage("Please wait while we save the Data");
+                    mMainProgress.setCanceledOnTouchOutside(true);
+                    mMainProgress.show();
 
                     Map<String, Object> restaurant = new HashMap<>();
                     restaurant.put("costForTwo", costForTwo);
@@ -564,7 +681,7 @@ public class Fragment_generalInfo extends Fragment {
                     restaurant.put("sgst", sgst);
                     restaurant.put("cgst", cgst);
                     restaurant.put("serviceCharges", serviceCharges);
-
+                    //-------Timing---------------
                     restaurant.put("monOpen", monOpen);
                     restaurant.put("monClose", monClose);
                     restaurant.put("tueOpen", tueOpen);
@@ -579,32 +696,43 @@ public class Fragment_generalInfo extends Fragment {
                     restaurant.put("satClose", satClose);
                     restaurant.put("sunOpen", sunOpen);
                     restaurant.put("sunClose", sunClose);
+                    //--------Days--------------
+                    restaurant.put("deliveryCB", deliveryCB);
+                    restaurant.put("weekCB", weekCB);
+                    restaurant.put("monCB", monCB);
+                    restaurant.put("tueCB", tueCB);
+                    restaurant.put("wedCB", wedCB);
+                    restaurant.put("thuCB", thuCB);
+                    restaurant.put("friCB", friCB);
+                    restaurant.put("satCB", satCB);
+                    restaurant.put("sunCB", sunCB);
+
 
                     mDocRef.update(restaurant).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
 
-                            if (task.isSuccessful()){
+                            if (task.isSuccessful()) {
 
                                 mMainProgress.dismiss();
 
-                                Intent intent = new Intent(getActivity(),MainActivity.class);
+                                Intent intent = new Intent(getActivity(), MainActivity.class);
                                 startActivity(intent);
                                 getActivity().finish();
 
-                            }else {
+                            } else {
 
                                 mMainProgress.dismiss();
-                                Toast.makeText(getActivity(),task.getException().getMessage().toString(),Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity(), task.getException().getMessage().toString(), Toast.LENGTH_LONG).show();
 
                             }
 
                         }
                     });
 
-                }else {
+                } else {
 
-                    Toast.makeText(getActivity(),"Please fill all the mandatory fileds and try again",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Please fill all the mandatory fileds and try again", Toast.LENGTH_LONG).show();
 
                 }
 
@@ -615,224 +743,238 @@ public class Fragment_generalInfo extends Fragment {
 
     //------------Monday Time Picker-------------
 
-    private Dialog onCreateDialog_monOpen(int id){
+    private Dialog onCreateDialog_monOpen(int id) {
         if (id == 1)
             return new TimePickerDialog(getActivity(), monOpen_timePickerListener, hour, minute, true);
         return null;
     }
+
     protected TimePickerDialog.OnTimeSetListener monOpen_timePickerListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker timePicker, int hourofDay, int minuteofDay) {
             hour = hourofDay;
             minute = minuteofDay;
-            mMonOpen.setText(hour+":"+minute);
-            mTueOpen.setText(hour+":"+minute);
-            mWedOpen.setText(hour+":"+minute);
-            mThuOpen.setText(hour+":"+minute);
-            mFriOpen.setText(hour+":"+minute);
-            mSatOpen.setText(hour+":"+minute);
-            mSunOpen.setText(hour+":"+minute);
+            mMonOpen.setText(hour + ":" + minute);
+            mTueOpen.setText(hour + ":" + minute);
+            mWedOpen.setText(hour + ":" + minute);
+            mThuOpen.setText(hour + ":" + minute);
+            mFriOpen.setText(hour + ":" + minute);
+            mSatOpen.setText(hour + ":" + minute);
+            mSunOpen.setText(hour + ":" + minute);
         }
     };
 
-    private Dialog onCreateDialog_monClose(int id){
+    private Dialog onCreateDialog_monClose(int id) {
         if (id == 1)
             return new TimePickerDialog(getActivity(), monClose_timePickerListener, hour, minute, true);
         return null;
     }
+
     protected TimePickerDialog.OnTimeSetListener monClose_timePickerListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker timePicker, int hourofDay, int minuteofDay) {
             hour = hourofDay;
             minute = minuteofDay;
-            mMonClose.setText(hour+":"+minute);
-            mTueClose.setText(hour+":"+minute);
-            mWedClose.setText(hour+":"+minute);
-            mThuClose.setText(hour+":"+minute);
-            mFriClose.setText(hour+":"+minute);
-            mSatClose.setText(hour+":"+minute);
-            mSunClose.setText(hour+":"+minute);
+            mMonClose.setText(hour + ":" + minute);
+            mTueClose.setText(hour + ":" + minute);
+            mWedClose.setText(hour + ":" + minute);
+            mThuClose.setText(hour + ":" + minute);
+            mFriClose.setText(hour + ":" + minute);
+            mSatClose.setText(hour + ":" + minute);
+            mSunClose.setText(hour + ":" + minute);
         }
     };
 
 
     //------------Tuesday Time Picker-------------
 
-    private Dialog onCreateDialog_tueOpen(int id){
+    private Dialog onCreateDialog_tueOpen(int id) {
         if (id == 1)
             return new TimePickerDialog(getActivity(), tueOpen_timePickerListener, hour, minute, true);
         return null;
     }
+
     protected TimePickerDialog.OnTimeSetListener tueOpen_timePickerListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker timePicker, int hourofDay, int minuteofDay) {
             hour = hourofDay;
             minute = minuteofDay;
-            mTueOpen.setText(hour+":"+minute);
+            mTueOpen.setText(hour + ":" + minute);
         }
     };
 
-    private Dialog onCreateDialog_tueClose(int id){
+    private Dialog onCreateDialog_tueClose(int id) {
         if (id == 1)
             return new TimePickerDialog(getActivity(), tueClose_timePickerListener, hour, minute, true);
         return null;
     }
+
     protected TimePickerDialog.OnTimeSetListener tueClose_timePickerListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker timePicker, int hourofDay, int minuteofDay) {
             hour = hourofDay;
             minute = minuteofDay;
-            mTueClose.setText(hour+":"+minute);
+            mTueClose.setText(hour + ":" + minute);
         }
     };
 
     //------------Wednesday Time Picker-------------
 
-    private Dialog onCreateDialog_wedOpen(int id){
+    private Dialog onCreateDialog_wedOpen(int id) {
         if (id == 1)
             return new TimePickerDialog(getActivity(), wedOpen_timePickerListener, hour, minute, true);
         return null;
     }
+
     protected TimePickerDialog.OnTimeSetListener wedOpen_timePickerListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker timePicker, int hourofDay, int minuteofDay) {
             hour = hourofDay;
             minute = minuteofDay;
-            mWedOpen.setText(hour+":"+minute);
+            mWedOpen.setText(hour + ":" + minute);
         }
     };
 
-    private Dialog onCreateDialog_wedClose(int id){
+    private Dialog onCreateDialog_wedClose(int id) {
         if (id == 1)
             return new TimePickerDialog(getActivity(), wedClose_timePickerListener, hour, minute, true);
         return null;
     }
+
     protected TimePickerDialog.OnTimeSetListener wedClose_timePickerListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker timePicker, int hourofDay, int minuteofDay) {
             hour = hourofDay;
             minute = minuteofDay;
-            mWedClose.setText(hour+":"+minute);
+            mWedClose.setText(hour + ":" + minute);
         }
     };
 
     //------------Thuresday Time Picker-------------
 
-    private Dialog onCreateDialog_thuOpen(int id){
+    private Dialog onCreateDialog_thuOpen(int id) {
         if (id == 1)
             return new TimePickerDialog(getActivity(), thuOpen_timePickerListener, hour, minute, true);
         return null;
     }
+
     protected TimePickerDialog.OnTimeSetListener thuOpen_timePickerListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker timePicker, int hourofDay, int minuteofDay) {
             hour = hourofDay;
             minute = minuteofDay;
-            mThuOpen.setText(hour+":"+minute);
+            mThuOpen.setText(hour + ":" + minute);
         }
     };
 
-    private Dialog onCreateDialog_thuClose(int id){
+    private Dialog onCreateDialog_thuClose(int id) {
         if (id == 1)
             return new TimePickerDialog(getActivity(), thuClose_timePickerListener, hour, minute, true);
         return null;
     }
+
     protected TimePickerDialog.OnTimeSetListener thuClose_timePickerListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker timePicker, int hourofDay, int minuteofDay) {
             hour = hourofDay;
             minute = minuteofDay;
-            mThuClose.setText(hour+":"+minute);
+            mThuClose.setText(hour + ":" + minute);
         }
     };
 
     //------------Friday Time Picker-------------
 
-    private Dialog onCreateDialog_friOpen(int id){
+    private Dialog onCreateDialog_friOpen(int id) {
         if (id == 1)
             return new TimePickerDialog(getActivity(), friOpen_timePickerListener, hour, minute, true);
         return null;
     }
+
     protected TimePickerDialog.OnTimeSetListener friOpen_timePickerListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker timePicker, int hourofDay, int minuteofDay) {
             hour = hourofDay;
             minute = minuteofDay;
-            mFriOpen.setText(hour+":"+minute);
+            mFriOpen.setText(hour + ":" + minute);
         }
     };
 
-    private Dialog onCreateDialog_friClose(int id){
+    private Dialog onCreateDialog_friClose(int id) {
         if (id == 1)
             return new TimePickerDialog(getActivity(), friClose_timePickerListener, hour, minute, true);
         return null;
     }
+
     protected TimePickerDialog.OnTimeSetListener friClose_timePickerListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker timePicker, int hourofDay, int minuteofDay) {
             hour = hourofDay;
             minute = minuteofDay;
-            mFriClose.setText(hour+":"+minute);
+            mFriClose.setText(hour + ":" + minute);
         }
     };
 
     //------------Saturday Time Picker-------------
 
-    private Dialog onCreateDialog_satOpen(int id){
+    private Dialog onCreateDialog_satOpen(int id) {
         if (id == 1)
             return new TimePickerDialog(getActivity(), satOpen_timePickerListener, hour, minute, true);
         return null;
     }
+
     protected TimePickerDialog.OnTimeSetListener satOpen_timePickerListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker timePicker, int hourofDay, int minuteofDay) {
             hour = hourofDay;
             minute = minuteofDay;
-            mSatOpen.setText(hour+":"+minute);
+            mSatOpen.setText(hour + ":" + minute);
         }
     };
 
-    private Dialog onCreateDialog_satClose(int id){
+    private Dialog onCreateDialog_satClose(int id) {
         if (id == 1)
             return new TimePickerDialog(getActivity(), satClose_timePickerListener, hour, minute, true);
         return null;
     }
+
     protected TimePickerDialog.OnTimeSetListener satClose_timePickerListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker timePicker, int hourofDay, int minuteofDay) {
             hour = hourofDay;
             minute = minuteofDay;
-            mSatClose.setText(hour+":"+minute);
+            mSatClose.setText(hour + ":" + minute);
         }
     };
 
     //------------sunday Time Picker-------------
 
-    private Dialog onCreateDialog_sunOpen(int id){
+    private Dialog onCreateDialog_sunOpen(int id) {
         if (id == 1)
             return new TimePickerDialog(getActivity(), sunOpen_timePickerListener, hour, minute, true);
         return null;
     }
+
     protected TimePickerDialog.OnTimeSetListener sunOpen_timePickerListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker timePicker, int hourofDay, int minuteofDay) {
             hour = hourofDay;
             minute = minuteofDay;
-            mSunOpen.setText(hour+":"+minute);
+            mSunOpen.setText(hour + ":" + minute);
         }
     };
 
-    private Dialog onCreateDialog_sunClose(int id){
+    private Dialog onCreateDialog_sunClose(int id) {
         if (id == 1)
             return new TimePickerDialog(getActivity(), sunClose_timePickerListener, hour, minute, true);
         return null;
     }
+
     protected TimePickerDialog.OnTimeSetListener sunClose_timePickerListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker timePicker, int hourofDay, int minuteofDay) {
             hour = hourofDay;
             minute = minuteofDay;
-            mSunClose.setText(hour+":"+minute);
+            mSunClose.setText(hour + ":" + minute);
         }
     };
 

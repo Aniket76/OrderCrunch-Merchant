@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -20,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
  */
 public class Fragment_Main extends Fragment {
 
-    private Button one,two,three,logout;
+    private Button one,two,three,logout,activity;
     private FirebaseAuth mAuth;
 
     public Fragment_Main() {
@@ -43,6 +44,7 @@ public class Fragment_Main extends Fragment {
         two = (Button)getActivity().findViewById(R.id.two);
         three = (Button)getActivity().findViewById(R.id.three);
         logout = (Button)getActivity().findViewById(R.id.logout);
+        activity = (Button)getActivity().findViewById(R.id.activity);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -102,6 +104,15 @@ public class Fragment_Main extends Fragment {
                 Intent startIntent = new Intent(getActivity(),StartActivity.class);
                 startActivity(startIntent);
                 getActivity().finish();
+
+            }
+        });
+
+        activity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Toast.makeText(getActivity(),getActivity().getClass().getSimpleName().toString(),Toast.LENGTH_LONG).show();
 
             }
         });

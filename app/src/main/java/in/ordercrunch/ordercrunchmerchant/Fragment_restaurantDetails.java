@@ -2,6 +2,7 @@ package in.ordercrunch.ordercrunchmerchant;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -49,7 +51,7 @@ public class Fragment_restaurantDetails extends Fragment {
     private FirebaseAuth mAuth;
     private DocumentReference mDocRef;
 
-    private String dbShopNo;
+    private String activityNameCheck;
 
     public Fragment_restaurantDetails() {
         // Required empty public constructor
@@ -67,12 +69,7 @@ public class Fragment_restaurantDetails extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mMainProgress = new ProgressDialog(getContext());
-
-        mMainProgress.setTitle("Retrieving Data");
-        mMainProgress.setMessage("Please wait while we retrieve the Data");
-        mMainProgress.setCanceledOnTouchOutside(true);
-        mMainProgress.show();
+        activityNameCheck = getActivity().getClass().getSimpleName().toString();
 
         mRestaurantName = (TextInputLayout) getActivity().findViewById(R.id.details_name);
         mTagLine = (TextInputLayout) getActivity().findViewById(R.id.details_tagLine);
@@ -98,6 +95,13 @@ public class Fragment_restaurantDetails extends Fragment {
 
         mDocRef = FirebaseFirestore.getInstance().collection("restaurant").document(uid);
 
+        mMainProgress = new ProgressDialog(getContext());
+
+        mMainProgress.setTitle("Retrieving Data");
+        mMainProgress.setMessage("Please wait while we retrieve the Data");
+        mMainProgress.setCanceledOnTouchOutside(true);
+        mMainProgress.show();
+
         mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -107,9 +111,7 @@ public class Fragment_restaurantDetails extends Fragment {
 
                     mPhoneNumber.setEnabled(false);
 
-                    dbShopNo = documentSnapshot.getString("shopNo");
-
-                    String dbName = documentSnapshot.getString("name");
+                    String dbName = documentSnapshot.getString("aaName");
                     String dbTagLine = documentSnapshot.getString("tagLine");
                     String dbEmail = documentSnapshot.getString("email");
                     String dbWebsite = documentSnapshot.getString("website");
@@ -153,15 +155,42 @@ public class Fragment_restaurantDetails extends Fragment {
             }
         });
 
+        mChangeNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (activityNameCheck.equals("MainActivity")){
+
+                    Fragment_PhoneVerification fragment = new Fragment_PhoneVerification();
+                    FragmentManager manager = getFragmentManager();
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    transaction.replace(R.id.main_activity_layout,fragment,"Fragment PhoneVerification");
+                    transaction.addToBackStack(null);
+                    transaction.setReorderingAllowed(true);
+                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+                    transaction.commit();
+
+                }else {
+
+                    Fragment_PhoneVerification fragment = new Fragment_PhoneVerification();
+                    FragmentManager manager = getFragmentManager();
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    transaction.replace(R.id.details_activity_layout, fragment, "Fragment PhoneVerification");
+                    transaction.addToBackStack(null);
+                    transaction.setReorderingAllowed(true);
+                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+                    transaction.commit();
+
+                }
+            }
+        });
+
         mDetailsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                mMainProgress.setTitle("Saving Data");
-                mMainProgress.setMessage("Please wait while we save the Data");
-                mMainProgress.setCanceledOnTouchOutside(true);
-                mMainProgress.show();
-
+                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
                 String name = mRestaurantName.getEditText().getText().toString();
                 String tagLine = mTagLine.getEditText().getText().toString();
@@ -173,7 +202,7 @@ public class Fragment_restaurantDetails extends Fragment {
 
                 Boolean dineIn;
                 Boolean homeDelivery;
-                final Boolean takeAway;
+                Boolean takeAway;
                 Boolean onTheGo;
 
                 if (mDineIn.isChecked())
@@ -196,11 +225,17 @@ public class Fragment_restaurantDetails extends Fragment {
                 else
                     onTheGo = false;
 
-                if (!TextUtils.isEmpty(name) || !TextUtils.isEmpty(email) || !TextUtils.isEmpty(cuisines))
+                if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(cuisines) && (dineIn || takeAway || homeDelivery || onTheGo))
                 {
 
+                    mMainProgress.setTitle("Saving Data");
+                    mMainProgress.setMessage("Please wait while we save the Data");
+                    mMainProgress.setCanceledOnTouchOutside(true);
+                    mMainProgress.show();
+
+
                     Map<String, Object> restaurant = new HashMap<>();
-                    restaurant.put("name", name);
+                    restaurant.put("aaName", name);
                     restaurant.put("tagLine", tagLine);
                     restaurant.put("email", email);
                     restaurant.put("website", website);
@@ -220,12 +255,12 @@ public class Fragment_restaurantDetails extends Fragment {
 
                                 mMainProgress.dismiss();
 
-                                if(dbShopNo == ""){
+                                if(activityNameCheck.equals("MainActivity")){
 
-                                    Fragment_address fragment = new Fragment_address();
+                                    Fragment_Main fragment = new Fragment_Main();
                                     FragmentManager manager = getFragmentManager();
                                     FragmentTransaction transaction = manager.beginTransaction();
-                                    transaction.replace(R.id.details_activity_layout, fragment, "AddressFragment");
+                                    transaction.replace(R.id.main_activity_layout, fragment, "Main Fragment");
                                     transaction.addToBackStack(null);
                                     transaction.setReorderingAllowed(true);
                                     transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
@@ -233,10 +268,10 @@ public class Fragment_restaurantDetails extends Fragment {
 
                                 }else {
 
-                                    Fragment_Main fragment = new Fragment_Main();
+                                    Fragment_address fragment = new Fragment_address();
                                     FragmentManager manager = getFragmentManager();
                                     FragmentTransaction transaction = manager.beginTransaction();
-                                    transaction.replace(R.id.main_activity_layout, fragment, "Main Fragment");
+                                    transaction.replace(R.id.details_activity_layout, fragment, "AddressFragment");
                                     transaction.addToBackStack(null);
                                     transaction.setReorderingAllowed(true);
                                     transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);

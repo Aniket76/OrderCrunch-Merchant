@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/main"
         android:layout_centerHorizontal="true"
-        android:text="one"/>
+        android:text="Details Fragment"/>
 
     <Button
         android:id="@+id/two"
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/one"
         android:layout_centerHorizontal="true"
-        android:text="two"/>
+        android:text="Address Fragment"/>
 
     <Button
         android:id="@+id/three"
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/two"
         android:layout_centerHorizontal="true"
-        android:text="three"/>
+        android:text="Info fragment"/>
 
     <Button
         android:id="@+id/logout"
@@ -43,5 +43,13 @@
         android:layout_below="@+id/three"
         android:layout_centerHorizontal="true"
         android:text="logout"/>
+
+    <Button
+        android:id="@+id/activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/main"
+        android:layout_centerHorizontal="true"
+        android:text="activity name"/>
 
 </RelativeLayout>

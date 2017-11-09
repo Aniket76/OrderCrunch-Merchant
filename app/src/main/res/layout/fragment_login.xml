@@ -80,6 +80,19 @@
                 android:textColor="#ffffff"
                 android:text="Login" />
 
+            <Button
+                android:id="@+id/demo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:backgroundTint="@color/colorAccent"
+                android:layout_below="@+id/login_btn"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="15dp"
+                android:textColor="#ffffff"
+                android:text="demo" />
+
             <TextView
                 android:id="@+id/login_forgotpass"
                 android:layout_width="wrap_content"
