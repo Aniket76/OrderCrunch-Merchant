@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="in.ordercrunch.ordercrunchmerchant.Fragment_restaurantDetails">
+    tools:context="in.ordercrunch.ordercrunchmerchant.Fragment_RestaurantDetails">
 
     <ScrollView
         android:layout_width="match_parent"

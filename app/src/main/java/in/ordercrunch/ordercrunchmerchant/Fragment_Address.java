@@ -35,7 +35,7 @@ import java.util.Map;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Fragment_address extends Fragment {
+public class Fragment_Address extends Fragment {
 
     private TextInputLayout mShopNo, mLocation, mLandMark, mPinCode, mCity, mState;
 
@@ -47,7 +47,7 @@ public class Fragment_address extends Fragment {
 
     private String dbCostForTwo, activityNameCheck;
 
-    public Fragment_address() {
+    public Fragment_Address() {
         // Required empty public constructor
     }
 
@@ -184,7 +184,7 @@ public class Fragment_address extends Fragment {
 
                                 } else {
 
-                                    Fragment_generalInfo fragment = new Fragment_generalInfo();
+                                    Fragment_GeneralInfo fragment = new Fragment_GeneralInfo();
                                     FragmentManager manager = getFragmentManager();
                                     FragmentTransaction transaction = manager.beginTransaction();
                                     transaction.replace(R.id.details_activity_layout, fragment, "GeneralInfoFragment");

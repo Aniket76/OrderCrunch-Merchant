@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#ff5521</color>
 
+    <color name="inActive_nav">#9e9e9e</color>
+
     <color name="screen1">#F44336</color>
     <color name="screen2">#E91E63</color>
     <color name="screen3">#9C27B0</color>

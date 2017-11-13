@@ -3,7 +3,6 @@ package in.ordercrunch.ordercrunchmerchant;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -37,7 +36,7 @@ import java.util.Map;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Fragment_restaurantDetails extends Fragment {
+public class Fragment_RestaurantDetails extends Fragment {
 
     private TextInputLayout mRestaurantName, mTagLine, mEmail, mWebsite, mPhoneNumber, mAlterPhoneNumber, mCuisines;
 
@@ -53,7 +52,7 @@ public class Fragment_restaurantDetails extends Fragment {
 
     private String activityNameCheck;
 
-    public Fragment_restaurantDetails() {
+    public Fragment_RestaurantDetails() {
         // Required empty public constructor
     }
 
@@ -268,7 +267,7 @@ public class Fragment_restaurantDetails extends Fragment {
 
                                 }else {
 
-                                    Fragment_address fragment = new Fragment_address();
+                                    Fragment_Address fragment = new Fragment_Address();
                                     FragmentManager manager = getFragmentManager();
                                     FragmentTransaction transaction = manager.beginTransaction();
                                     transaction.replace(R.id.details_activity_layout, fragment, "AddressFragment");

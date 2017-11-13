@@ -47,7 +47,7 @@ import java.util.Map;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Fragment_generalInfo extends Fragment {
+public class Fragment_GeneralInfo extends Fragment {
 
     private Button mGeneralInfoBtn;
     private CheckBox mWeekCheckBox, mDeliveryCheckBox;
@@ -69,7 +69,7 @@ public class Fragment_generalInfo extends Fragment {
 
     private int hour, minute;
 
-    public Fragment_generalInfo() {
+    public Fragment_GeneralInfo() {
         // Required empty public constructor
     }
 
@@ -113,6 +113,147 @@ public class Fragment_generalInfo extends Fragment {
         mDeliveryLatout = (RelativeLayout) getActivity().findViewById(R.id.info_layout);
 
         mTimingMsg = (TextView) getActivity().findViewById(R.id.timing_msg_txt);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = current_user.getUid();
+
+        mDocRef = FirebaseFirestore.getInstance().collection("restaurant").document(uid);
+
+        if (activityNameCheck.equals("MainActivity")) {
+
+            mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                    if (documentSnapshot.exists()) {
+
+                        String dbCostForTwo = documentSnapshot.getString("costForTwo");
+                        String dbMinOrder = documentSnapshot.getString("minOrder");
+                        String dbDeliveryCost = documentSnapshot.getString("deliveryCost");
+                        String dbXAmount = documentSnapshot.getString("xAmount");
+                        String dbSgst = documentSnapshot.getString("sgst");
+                        String dbCgst = documentSnapshot.getString("cgst");
+                        String dbServiceCharges = documentSnapshot.getString("serviceCharges");
+
+                        String dbMonOpen = documentSnapshot.getString("monOpen");
+                        String dbMonClose = documentSnapshot.getString("monClose");
+                        String dbTueOpen = documentSnapshot.getString("tueOpen");
+                        String dbTueClose = documentSnapshot.getString("tueClose");
+                        String dbWedOpen = documentSnapshot.getString("wedOpen");
+                        String dbWedClose = documentSnapshot.getString("wedClose");
+                        String dbThuOpen = documentSnapshot.getString("thuOpen");
+                        String dbThuClose = documentSnapshot.getString("thuClose");
+                        String dbFriOpen = documentSnapshot.getString("friOpen");
+                        String dbFriClose = documentSnapshot.getString("friClose");
+                        String dbSatOpen = documentSnapshot.getString("satOpen");
+                        String dbSatClose = documentSnapshot.getString("satClose");
+                        String dbSunOpen = documentSnapshot.getString("sunOpen");
+                        String dbSunClose = documentSnapshot.getString("sunClose");
+
+                        Boolean dbDeliveryCB = documentSnapshot.getBoolean("deliveryCB");
+                        Boolean dbWeekCB = documentSnapshot.getBoolean("weekCB");
+                        Boolean dbmonCB = documentSnapshot.getBoolean("monCB");
+                        Boolean dbtueCB = documentSnapshot.getBoolean("tueCB");
+                        Boolean dbwedCB = documentSnapshot.getBoolean("wedCB");
+                        Boolean dbthuCB = documentSnapshot.getBoolean("thuCB");
+                        Boolean dbfriCB = documentSnapshot.getBoolean("friCB");
+                        Boolean dbsatCB = documentSnapshot.getBoolean("satCB");
+                        Boolean dbsunCB = documentSnapshot.getBoolean("sunCB");
+
+                        mCostForTwo.getEditText().setText(dbCostForTwo);
+                        mMinOrder.getEditText().setText(dbMinOrder);
+                        mDeliveryCost.getEditText().setText(dbDeliveryCost);
+                        mXAmount.getEditText().setText(dbXAmount);
+                        mSgst.getEditText().setText(dbSgst);
+                        mCgst.getEditText().setText(dbCgst);
+                        mServiceCharges.getEditText().setText(dbServiceCharges);
+
+                        mMonOpen.setText(dbMonOpen);
+                        mMonClose.setText(dbMonClose);
+                        mTueOpen.setText(dbTueOpen);
+                        mTueClose.setText(dbTueClose);
+                        mWedOpen.setText(dbWedOpen);
+                        mWedClose.setText(dbWedClose);
+                        mThuOpen.setText(dbThuOpen);
+                        mThuClose.setText(dbThuClose);
+                        mFriOpen.setText(dbFriOpen);
+                        mFriClose.setText(dbFriClose);
+                        mSatOpen.setText(dbSatOpen);
+                        mSatClose.setText(dbSatClose);
+                        mSunOpen.setText(dbSunOpen);
+                        mSunClose.setText(dbSunClose);
+
+                        if (dbDeliveryCB)
+                            mDeliveryCheckBox.setChecked(true);
+                        else
+                            mDeliveryCheckBox.setChecked(false);
+
+                        if (dbWeekCB)
+                            mWeekCheckBox.setChecked(true);
+                        else
+                            mWeekCheckBox.setChecked(false);
+
+                        if (dbmonCB)
+                            mMonCB.setChecked(true);
+                        else
+                            mMonCB.setChecked(false);
+
+                        if (dbtueCB)
+                            mTueCB.setChecked(true);
+                        else
+                            mTueCB.setChecked(false);
+
+                        if (dbwedCB)
+                            mWedCB.setChecked(true);
+                        else
+                            mWedCB.setChecked(false);
+
+                        if (dbthuCB)
+                            mThuCB.setChecked(true);
+                        else
+                            mThuCB.setChecked(false);
+
+                        if (dbfriCB)
+                            mFriCB.setChecked(true);
+                        else
+                            mFriCB.setChecked(false);
+
+                        if (dbsatCB)
+                            mSatCB.setChecked(true);
+                        else
+                            mSatCB.setChecked(false);
+
+                        if (dbsunCB)
+                            mSunCB.setChecked(true);
+                        else
+                            mSunCB.setChecked(false);
+
+                        mMainProgress.dismiss();
+
+                    }
+
+                }
+
+            })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                            mMainProgress.dismiss();
+                            Toast.makeText(getActivity(), e.getMessage().toString(), Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+
+        } else
+
+        {
+
+            Toast.makeText(getActivity(), "No Data found please fill the form", Toast.LENGTH_LONG).show();
+
+        }
 
         //-------Monday Timing----------
         mMonOpen = (TextView) getActivity().findViewById(R.id.mon_open);
@@ -435,147 +576,6 @@ public class Fragment_generalInfo extends Fragment {
 
             }
         });
-
-        mAuth = FirebaseAuth.getInstance();
-
-        FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = current_user.getUid();
-
-        mDocRef = FirebaseFirestore.getInstance().collection("restaurant").document(uid);
-
-        if (activityNameCheck.equals("MainActivity")) {
-
-            mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-
-                    if (documentSnapshot.exists()) {
-
-                        String dbCostForTwo = documentSnapshot.getString("costForTwo");
-                        String dbMinOrder = documentSnapshot.getString("minOrder");
-                        String dbDeliveryCost = documentSnapshot.getString("deliveryCost");
-                        String dbXAmount = documentSnapshot.getString("xAmount");
-                        String dbSgst = documentSnapshot.getString("sgst");
-                        String dbCgst = documentSnapshot.getString("cgst");
-                        String dbServiceCharges = documentSnapshot.getString("serviceCharges");
-
-                        String dbMonOpen = documentSnapshot.getString("monOpen");
-                        String dbMonClose = documentSnapshot.getString("monClose");
-                        String dbTueOpen = documentSnapshot.getString("tueOpen");
-                        String dbTueClose = documentSnapshot.getString("tueClose");
-                        String dbWedOpen = documentSnapshot.getString("wedOpen");
-                        String dbWedClose = documentSnapshot.getString("wedClose");
-                        String dbThuOpen = documentSnapshot.getString("thuOpen");
-                        String dbThuClose = documentSnapshot.getString("thuClose");
-                        String dbFriOpen = documentSnapshot.getString("friOpen");
-                        String dbFriClose = documentSnapshot.getString("friClose");
-                        String dbSatOpen = documentSnapshot.getString("satOpen");
-                        String dbSatClose = documentSnapshot.getString("satClose");
-                        String dbSunOpen = documentSnapshot.getString("sunOpen");
-                        String dbSunClose = documentSnapshot.getString("sunClose");
-
-                        Boolean dbDeliveryCB = documentSnapshot.getBoolean("deliveryCB");
-                        Boolean dbWeekCB = documentSnapshot.getBoolean("weekCB");
-                        Boolean dbmonCB = documentSnapshot.getBoolean("monCB");
-                        Boolean dbtueCB = documentSnapshot.getBoolean("tueCB");
-                        Boolean dbwedCB = documentSnapshot.getBoolean("wedCB");
-                        Boolean dbthuCB = documentSnapshot.getBoolean("thuCB");
-                        Boolean dbfriCB = documentSnapshot.getBoolean("friCB");
-                        Boolean dbsatCB = documentSnapshot.getBoolean("satCB");
-                        Boolean dbsunCB = documentSnapshot.getBoolean("sunCB");
-
-                        mCostForTwo.getEditText().setText(dbCostForTwo);
-                        mMinOrder.getEditText().setText(dbMinOrder);
-                        mDeliveryCost.getEditText().setText(dbDeliveryCost);
-                        mXAmount.getEditText().setText(dbXAmount);
-                        mSgst.getEditText().setText(dbSgst);
-                        mCgst.getEditText().setText(dbCgst);
-                        mServiceCharges.getEditText().setText(dbServiceCharges);
-
-                        mMonOpen.setText(dbMonOpen);
-                        mMonClose.setText(dbMonClose);
-                        mTueOpen.setText(dbTueOpen);
-                        mTueClose.setText(dbTueClose);
-                        mWedOpen.setText(dbWedOpen);
-                        mWedClose.setText(dbWedClose);
-                        mThuOpen.setText(dbThuOpen);
-                        mThuClose.setText(dbThuClose);
-                        mFriOpen.setText(dbFriOpen);
-                        mFriClose.setText(dbFriClose);
-                        mSatOpen.setText(dbSatOpen);
-                        mSatClose.setText(dbSatClose);
-                        mSunOpen.setText(dbSunOpen);
-                        mSunClose.setText(dbSunClose);
-
-                        if (dbDeliveryCB == true)
-                            mDeliveryCheckBox.setChecked(true);
-                        else
-                            mDeliveryCheckBox.setChecked(false);
-
-                        if (dbWeekCB == true)
-                            mWeekCheckBox.setChecked(true);
-                        else
-                            mWeekCheckBox.setChecked(false);
-
-                        if (dbmonCB == true)
-                            mMonCB.setChecked(true);
-                        else
-                            mMonCB.setChecked(false);
-
-                        if (dbtueCB == true)
-                            mTueCB.setChecked(true);
-                        else
-                            mTueCB.setChecked(false);
-
-                        if (dbwedCB == true)
-                            mWedCB.setChecked(true);
-                        else
-                            mWedCB.setChecked(false);
-
-                        if (dbthuCB == true)
-                            mThuCB.setChecked(true);
-                        else
-                            mThuCB.setChecked(false);
-
-                        if (dbfriCB == true)
-                            mFriCB.setChecked(true);
-                        else
-                            mFriCB.setChecked(false);
-
-                        if (dbsatCB == true)
-                            mSatCB.setChecked(true);
-                        else
-                            mSatCB.setChecked(false);
-
-                        if (dbsunCB == true)
-                            mSunCB.setChecked(true);
-                        else
-                            mSunCB.setChecked(false);
-
-                        mMainProgress.dismiss();
-
-                    }
-
-                }
-
-            })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-
-                            mMainProgress.dismiss();
-                            Toast.makeText(getActivity(), e.getMessage().toString(), Toast.LENGTH_LONG).show();
-
-                        }
-                    });
-
-        } else
-
-        {
-
-            Toast.makeText(getActivity(), "No Data found please fill the form", Toast.LENGTH_LONG).show();
-
-        }
 
 
         mGeneralInfoBtn.setOnClickListener(new View.OnClickListener()
