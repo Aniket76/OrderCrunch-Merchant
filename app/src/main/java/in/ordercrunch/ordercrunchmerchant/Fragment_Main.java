@@ -7,17 +7,22 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
+import java.lang.reflect.Field;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,6 +47,7 @@ public class Fragment_Main extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         mBottomNavigationItemView = (BottomNavigationView)getActivity().findViewById(R.id.bottom_nav);
+        BottomNavigationViewHelper.disableShiftMode(mBottomNavigationItemView);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.nav_cont, new Fragment_Order()).commit();
@@ -67,6 +73,12 @@ public class Fragment_Main extends Fragment {
                         return true;
 
                     case R.id.nav_history_btn:
+                        transaction.replace(R.id.nav_cont, new Fragment_History());
+                        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+                        transaction.commit();
+                        return true;
+
+                    case R.id.nav_account_btn:
                         transaction.replace(R.id.nav_cont, new Fragment_History());
                         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
                         transaction.commit();
