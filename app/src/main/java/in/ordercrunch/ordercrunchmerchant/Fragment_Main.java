@@ -79,7 +79,7 @@ public class Fragment_Main extends Fragment {
                         return true;
 
                     case R.id.nav_account_btn:
-                        transaction.replace(R.id.nav_cont, new Fragment_History());
+                        transaction.replace(R.id.nav_cont, new Fragment_Account());
                         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
                         transaction.commit();
                         return true;

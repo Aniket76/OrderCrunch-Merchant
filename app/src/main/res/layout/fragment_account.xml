@@ -1,0 +1,1131 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="in.ordercrunch.ordercrunchmerchant.Fragment_Account">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp">
+
+                <RelativeLayout
+                    android:id="@+id/profile_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="280dp"
+                    android:background="@color/colorPrimary">
+
+                    <View
+                        android:layout_width="160dp"
+                        android:layout_height="160dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/circular_btn_shape" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/acc_dp"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/circular_btn_shape"
+                        android:src="@drawable/acc_dp" />
+
+                    <TextView
+                        android:id="@+id/acc_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/acc_dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/josefinsans_bold"
+                        android:text="Restaurant Name"
+                        android:textColor="#ffffff"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:id="@+id/acc_tagLine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/acc_name"
+                        android:layout_centerHorizontal="true"
+                        android:fontFamily="@font/josefinsans_regular"
+                        android:text="Tag Line"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp" />
+
+                </RelativeLayout>
+
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginTop="240dp">
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:gravity="center"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="4.2"
+                                android:textSize="30dp"
+                                android:textColor="@color/colorAccent"
+                                android:fontFamily="@font/josefinsans_bold"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:textSize="18dp"
+                                android:fontFamily="@font/josefinsans_regular"
+                                android:text="Rating"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="76"
+                                android:textSize="30dp"
+                                android:textColor="@color/colorAccent"
+                                android:fontFamily="@font/josefinsans_bold"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:textSize="18dp"
+                                android:fontFamily="@font/josefinsans_regular"
+                                android:text="Orders"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </android.support.v7.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/profile_layout"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginTop="50dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/acc_details_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/acc_details_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:text="Details"
+                            android:textColor="#424242"
+                            android:textSize="22sp" />
+
+                        <ImageView
+                            android:id="@+id/acc_details_img"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_create_black_36dp"
+                            android:tint="#616161" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/acc_email_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/acc_email_img"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:padding="3dp"
+                            android:src="@drawable/fui_ic_mail_white_24dp"
+                            android:tint="#616161" />
+
+                        <TextView
+                            android:id="@+id/acc_email_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="5dp"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:text="Email"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/acc_website_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/acc_website_img"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:padding="3dp"
+                            android:src="@drawable/ic_public_black_36dp"
+                            android:tint="#616161" />
+
+                        <TextView
+                            android:id="@+id/acc_website_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="5dp"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:text="Website"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/acc_phoneNo_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/acc_phoneNo_img"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:padding="3dp"
+                            android:src="@drawable/fui_ic_phone_white_24dp"
+                            android:tint="#616161" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:orientation="vertical"
+                            >
+
+                            <TextView
+                                android:id="@+id/acc_phoneNo_txt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="5dp"
+                                android:fontFamily="@font/josefinsans_semibold"
+                                android:text="Phone Number"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:id="@+id/acc_alternativePhoneNo_txt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="5dp"
+                                android:fontFamily="@font/josefinsans_semibold"
+                                android:text="Altertnative PhoneNo"
+                                android:textSize="18sp"
+                                />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/acc_cuisines_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/acc_cuisines_img"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:padding="3dp"
+                            android:src="@drawable/ic_restaurant_black_36dp"
+                            android:tint="#616161" />
+
+                        <TextView
+                            android:id="@+id/acc_cuisines_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="5dp"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:text="Cuisines"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/acc_servises_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/acc_servises1_img"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="-3dp"
+                            android:paddingBottom="3dp"
+                            android:paddingLeft="3dp"
+                            android:paddingRight="3dp"
+                            android:src="@drawable/ic_strikethrough_s_black_36dp"
+                            android:tint="#616161" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="5dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/acc_servises1_txt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/josefinsans_semibold"
+                                android:text="Servises 1"
+                                android:textSize="18sp"
+                                />
+
+                            <TextView
+                                android:id="@+id/acc_servises2_txt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/josefinsans_semibold"
+                                android:text="Servises 2"
+                                android:textSize="18sp"
+                                />
+                            <TextView
+                                android:id="@+id/acc_servises3_txt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/josefinsans_semibold"
+                                android:text="Servises 3"
+                                android:textSize="18sp"
+                                />
+                            <TextView
+                                android:id="@+id/acc_servises4_txt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/josefinsans_semibold"
+                                android:text="Servises 4"
+                                android:textSize="18sp"
+                                />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+                    <LinearLayout
+                        android:id="@+id/acc_address_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/acc_address_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:text="Address"
+                            android:textColor="#424242"
+                            android:textSize="22sp" />
+
+                        <ImageView
+                            android:id="@+id/acc_address_img"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_create_black_36dp"
+                            android:tint="#616161" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/acc_add_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/acc_add_img"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:padding="3dp"
+                            android:src="@drawable/ic_store_black_36dp"
+                            android:tint="#616161" />
+
+                        <TextView
+                            android:id="@+id/acc_add_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="5dp"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:text="Address"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/acc_info_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/acc_info_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:text="General Information"
+                            android:textColor="#424242"
+                            android:textSize="22sp" />
+
+                        <ImageView
+                            android:id="@+id/acc_info_img"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_create_black_36dp"
+                            android:tint="#616161" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/acc_costForTwo_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:text="Cost For Two"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="20dp"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:text=":"
+                            android:textSize="15sp" />
+
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_indian_rupee"
+                            android:tint="#616161" />
+
+                        <TextView
+                            android:id="@+id/acc_costForTwo_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:text="000"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/acc_minimunOrder_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:text="Minimun Order"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="20dp"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:text=":"
+                            android:textSize="15sp" />
+
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_indian_rupee"
+                            android:tint="#616161" />
+
+                        <TextView
+                            android:id="@+id/acc_minimunOrder_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:text="000"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/acc_deliveryCost_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:text="Delivery Cost"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="20dp"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:text=":"
+                            android:textSize="15sp" />
+
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_indian_rupee"
+                            android:tint="#616161" />
+
+                        <TextView
+                            android:id="@+id/acc_deliveryCost_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:text="000"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/acc_xAmount_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/acc_xAmount_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:text="Delivery will be FREE above x amount."
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/acc_sgst_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:text="SGST"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="20dp"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:text=":"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/acc_sgst_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:text="0.00%"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/acc_cgst_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:text="CGST"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="20dp"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:text=":"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/acc_cgst_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:text="0.00%"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/acc_serviseCharges_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:text="Servise Charges"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="20dp"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:text=":"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/acc_serviseCharges_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:text="0.00%"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/acc_timing_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/acc_timing_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:text="Timing"
+                            android:textColor="#424242"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/acc_mon_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:text="MON:"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/acc_mon_open"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:gravity="center"
+                            android:text="Opening"
+                            android:textSize="20sp"
+                            />
+
+                        <TextView
+                            android:id="@+id/acc_mon_to"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:gravity="center"
+                            android:text="to"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/acc_mon_close"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:gravity="center"
+                            android:text="Closing"
+                            android:textSize="20sp"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/acc_tue_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/mon_layout"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:text="TUE:"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/acc_tue_open"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:gravity="center"
+                            android:text="Opening"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/acc_tue_to"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:gravity="center"
+                            android:text="to"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/acc_tue_close"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:gravity="center"
+                            android:text="Closing"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/acc_wed_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tue_layout"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:text="WED:"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/acc_wed_open"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:gravity="center"
+                            android:text="Opening"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/acc_wed_to"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:gravity="center"
+                            android:text="to"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/acc_wed_close"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:gravity="center"
+                            android:text="Closing"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/acc_thu_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/wed_layout"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:text="THU:"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/acc_thu_open"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:gravity="center"
+                            android:text="Opening"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/acc_thu_to"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:gravity="center"
+                            android:text="to"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/acc_thu_close"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:gravity="center"
+                            android:text="Closing"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/acc_fri_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/thu_layout"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:text="FRI:"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/acc_fri_open"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:gravity="center"
+                            android:text="Opening"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/acc_fri_to"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:gravity="center"
+                            android:text="to"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/acc_fri_close"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:gravity="center"
+                            android:text="Closing"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/acc_sat_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/fri_layout"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:text="SAT:"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/acc_sat_open"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:gravity="center"
+                            android:text="Opening"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/acc_sat_to"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:gravity="center"
+                            android:text="to"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/acc_sat_close"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:gravity="center"
+                            android:text="Closing"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/acc_sun_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/sat_layout"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        >
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:text="SUN:"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/acc_sun_open"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:gravity="center"
+                            android:text="Opening"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/acc_sun_to"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/josefinsans_regular"
+                            android:gravity="center"
+                            android:text="to"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/acc_sun_close"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:fontFamily="@font/josefinsans_semibold"
+                            android:gravity="center"
+                            android:text="Closing"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/acc_logout_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="Logout"
+                        android:backgroundTint="@color/colorAccent"
+                        android:textColor="#ffffff"/>
+                    
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/merchant_name_black"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/josefinsans_regular"
+                        android:text="Few Things Only A Food Lover Can Understand"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

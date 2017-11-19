@@ -42,7 +42,7 @@ public class Fragment_RestaurantDetails extends Fragment {
 
     private CheckBox mDineIn, mTakeAway, mHomeDelivery, mOnTheGo;
 
-    private ImageView mChangeNumber;
+    private ImageView mChangeNumber,mChangeEmail;
 
     private Button mDetailsBtn;
 
@@ -84,6 +84,7 @@ public class Fragment_RestaurantDetails extends Fragment {
         mOnTheGo = (CheckBox) getActivity().findViewById(R.id.details_onthego);
 
         mChangeNumber = (ImageView) getActivity().findViewById(R.id.details_changeNumber);
+        mChangeEmail = (ImageView) getActivity().findViewById(R.id.details_changeEmail);
 
         mDetailsBtn = (Button) getActivity().findViewById(R.id.btn_addDetails);
 
@@ -109,6 +110,7 @@ public class Fragment_RestaurantDetails extends Fragment {
                     mMainProgress.dismiss();
 
                     mPhoneNumber.setEnabled(false);
+                    mEmail.setEnabled(false);
 
                     String dbName = documentSnapshot.getString("aaName");
                     String dbTagLine = documentSnapshot.getString("tagLine");
@@ -179,6 +181,40 @@ public class Fragment_RestaurantDetails extends Fragment {
                     transaction.setReorderingAllowed(true);
                     transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
                     transaction.commit();
+
+                }
+            }
+        });
+
+        mChangeEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (activityNameCheck.equals("MainActivity")){
+
+//                    Fragment_PhoneVerification fragment = new Fragment_PhoneVerification();
+//                    FragmentManager manager = getFragmentManager();
+//                    FragmentTransaction transaction = manager.beginTransaction();
+//                    transaction.replace(R.id.main_activity_layout,fragment,"Fragment PhoneVerification");
+//                    transaction.addToBackStack(null);
+//                    transaction.setReorderingAllowed(true);
+//                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+//                    transaction.commit();
+
+                    Toast.makeText(getActivity(),"Called from MainActivity",Toast.LENGTH_LONG).show();
+
+                }else {
+
+//                    Fragment_PhoneVerification fragment = new Fragment_PhoneVerification();
+//                    FragmentManager manager = getFragmentManager();
+//                    FragmentTransaction transaction = manager.beginTransaction();
+//                    transaction.replace(R.id.details_activity_layout, fragment, "Fragment PhoneVerification");
+//                    transaction.addToBackStack(null);
+//                    transaction.setReorderingAllowed(true);
+//                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+//                    transaction.commit();
+
+                    Toast.makeText(getActivity(),"Called from DetailsActivity",Toast.LENGTH_LONG).show();
 
                 }
             }

@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         mToolbar = (Toolbar)findViewById(R.id.main_appBar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Order Crunch");
+        getSupportActionBar().setTitle("OrderCrunch : )");
 
     }
 

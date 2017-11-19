@@ -5,23 +5,23 @@
     <item
         android:id="@+id/nav_order_btn"
         android:title="Order"
-        android:icon="@drawable/ic_room_service_black_24dp"
+        android:icon="@drawable/ic_room_service_black_36dp"
         />
     <item
         android:id="@+id/nav_items_btn"
         android:title="Items"
-        android:icon="@drawable/ic_view_list_black_24dp"
+        android:icon="@drawable/ic_view_list_black_36dp"
         />
     <item
         android:id="@+id/nav_history_btn"
         android:title="History"
-        android:icon="@drawable/ic_history_black_24dp"
+        android:icon="@drawable/ic_history_black_36dp"
         />
 
     <item
         android:id="@+id/nav_account_btn"
         android:title="Account"
-        android:icon="@drawable/ic_person_black_24dp"
+        android:icon="@drawable/ic_person_black_36dp"
         />
 
 </menu>

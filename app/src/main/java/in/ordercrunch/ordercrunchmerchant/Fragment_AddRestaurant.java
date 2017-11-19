@@ -170,14 +170,14 @@ public class Fragment_AddRestaurant extends Fragment {
                     //-----INFO--------
                     restaurant.put("costForTwo",blank);
                     restaurant.put("deliveryCB",false);
-                    restaurant.put("weekCB",false);
-                    restaurant.put("monCB",false);
-                    restaurant.put("tueCB",false);
-                    restaurant.put("wedCB",false);
-                    restaurant.put("thuCB",false);
-                    restaurant.put("friCB",false);
-                    restaurant.put("satCB",false);
-                    restaurant.put("sunCB",false);
+                    restaurant.put("weekCB",true);
+                    restaurant.put("monCB",true);
+                    restaurant.put("tueCB",true);
+                    restaurant.put("wedCB",true);
+                    restaurant.put("thuCB",true);
+                    restaurant.put("friCB",true);
+                    restaurant.put("satCB",true);
+                    restaurant.put("sunCB",true);
 
                     mDocRef = FirebaseFirestore.getInstance().collection("restaurant").document(uid);
 
