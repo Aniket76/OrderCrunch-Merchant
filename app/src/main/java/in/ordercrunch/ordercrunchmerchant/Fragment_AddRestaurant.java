@@ -163,6 +163,9 @@ public class Fragment_AddRestaurant extends Fragment {
                     restaurant.put("takeAway", false);
                     restaurant.put("homeDelivery", false);
                     restaurant.put("onTheGo", false);
+                    restaurant.put("onlyVeg", false);
+                    restaurant.put("aaPaidStatus", false);
+                    restaurant.put("image", blank);
                     //-----address------
                     restaurant.put("shopNo",blank);
                     restaurant.put("city","Kolkata");

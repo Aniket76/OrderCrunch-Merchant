@@ -1,28 +1,57 @@
 package in.ordercrunch.ordercrunchmerchant;
 
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+import id.zelory.compressor.Compressor;
+
+import static android.app.Activity.RESULT_OK;
 
 
 /**
@@ -30,17 +59,27 @@ import com.google.firebase.firestore.FirebaseFirestoreSettings;
  */
 public class Fragment_Account extends Fragment {
 
-    private ImageView mDetailsBtn, mAddressBtn, mInfoBtn;
+    private ImageView mDetailsBtn, mAddressBtn, mInfoBtn, mChangeImageBtn, mVegImg;
     private Button mLogout;
 
     private TextView mRestaurantName,mTagLine;
-    private TextView mEmain,mWebsite,mPhoneNo,mAlternativePhoneNo,mCuisines,mServises1,mServises2,mServises3,mServises4;
+    private TextView mVegTxt,mEmain,mWebsite,mPhoneNo,mAlternativePhoneNo,mCuisines,mServises1,mServises2,mServises3,mServises4;
     private TextView mAddress;
     private TextView mCostForTwo,mMinOrder,mDelCost,mSGST,mCGST,mServiseCgarges,mXAmount;
     private TextView mMonOpen,mMonClose,mTueOpen,mTueClose,mWedOpen,mWedClose,mThuOpen,mThuClose,mFriOpen,mFriClose,mSatOpen,mSatClose,mSunOpen,mSunClose;
     private TextView mMonTo,mTueTo,mWedTo,mThuTo,mFriTo,mSatTo,mSunTo;
 
+    private CircleImageView mDisplayPic;
+
+    private ProgressDialog mMainProgress;
+
     private FirebaseAuth mAuth;
+    private StorageReference mImageStorage;
+
+    private String uid;
+    private String dbImage;
+
+    private static final int GALLEY_PICK = 1;
 
     public Fragment_Account() {
         // Required empty public constructor
@@ -58,8 +97,13 @@ public class Fragment_Account extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        mDisplayPic = (CircleImageView)getActivity().findViewById(R.id.acc_dp);
+
         mRestaurantName = (TextView)getActivity().findViewById(R.id.acc_name);
         mTagLine = (TextView)getActivity().findViewById(R.id.acc_tagLine);
+
+        mVegTxt = (TextView)getActivity().findViewById(R.id.acc_veg_txt);
+        mVegImg = (ImageView) getActivity().findViewById(R.id.acc_veg_img);
 
         mEmain = (TextView)getActivity().findViewById(R.id.acc_email_txt);
         mWebsite = (TextView)getActivity().findViewById(R.id.acc_website_txt);
@@ -112,12 +156,14 @@ public class Fragment_Account extends Fragment {
         mDetailsBtn = (ImageView) getActivity().findViewById(R.id.acc_details_img);
         mAddressBtn = (ImageView)getActivity().findViewById(R.id.acc_address_img);
         mInfoBtn = (ImageView)getActivity().findViewById(R.id.acc_info_img);
+        mChangeImageBtn = (ImageView)getActivity().findViewById(R.id.acc_changeImage_img);
         mLogout = (Button) getActivity().findViewById(R.id.acc_logout_btn);
 
         mAuth = FirebaseAuth.getInstance();
+        mImageStorage = FirebaseStorage.getInstance().getReference();
 
         FirebaseUser current_user = mAuth.getCurrentUser();
-        String uid = current_user.getUid();
+        uid = current_user.getUid();
 
         DocumentReference mDocRef = FirebaseFirestore.getInstance().collection("restaurant").document(uid);
 
@@ -129,24 +175,59 @@ public class Fragment_Account extends Fragment {
 
                     //----------Details Section---------
 
+                    dbImage = documentSnapshot.getString("image");
+                    if(!(dbImage.equals(""))){
+
+                                Picasso.with(getContext()).load(dbImage).networkPolicy(NetworkPolicy.OFFLINE)
+                                        .placeholder(R.drawable.walkthrough_background).into(mDisplayPic, new Callback() {
+                                    @Override
+                                    public void onSuccess() {
+
+                                    }
+
+                                    @Override
+                                    public void onError() {
+                                        Picasso.with(getContext()).load(dbImage).placeholder(R.drawable.walkthrough_background).into(mDisplayPic);
+                                    }
+                                });
+                    }
+
                     String dbName = documentSnapshot.getString("aaName");
                     mRestaurantName.setText(dbName);
 
                     String dbTagLine = documentSnapshot.getString("tagLine");
-                    mTagLine.setText(dbTagLine);
+                    if (dbTagLine.equals("")){
+                        mTagLine.setText("**No TagLine**");
+                    }else {
+                        mTagLine.setText(dbTagLine);
+                    }
+
+                    Boolean dbOnlyVeg = documentSnapshot.getBoolean("onlyVeg");
+                    if (dbOnlyVeg){
+                        mVegTxt.setText("Only Veg");
+                        Drawable veg  = getResources().getDrawable(R.drawable.ic_veg);
+                        mVegImg.setImageDrawable(veg);
+                    }else {
+                        mVegTxt.setText("Veg and Non-Veg Both");
+                        Drawable nonveg  = getResources().getDrawable(R.drawable.ic_nonveg);
+                        mVegImg.setImageDrawable(nonveg);                    }
 
                     String dbEmail = documentSnapshot.getString("email");
                     mEmain.setText(dbEmail);
 
                     String dbWebsite = documentSnapshot.getString("website");
-                    mWebsite.setText(dbWebsite);
+                    if (dbWebsite.equals("")){
+                        mWebsite.setText("**No Website**");
+                    }else {
+                        mWebsite.setText(dbWebsite);
+                    }
 
                     String dbPhoneNumber = documentSnapshot.getString("phoneNumber");
                     mPhoneNo.setText(dbPhoneNumber);
 
                     String dbAlterPhoneNumner = documentSnapshot.getString("alternativePhoneNumber");
                     if (dbAlterPhoneNumner.equals("")){
-                        mAlternativePhoneNo.setText("No Alternative Phone Number");
+                        mAlternativePhoneNo.setText("**No Alternative PhoneNo.**");
                     }else {
                         mAlternativePhoneNo.setText(dbAlterPhoneNumner);
                     }
@@ -188,23 +269,11 @@ public class Fragment_Account extends Fragment {
                     }
 
                     //--------------Address Section-------------
-                    String dbShopNo = documentSnapshot.getString("shopNo");
-                    String dbLocation = documentSnapshot.getString("location");
-                    String dbLandMark = documentSnapshot.getString("landMark");
-                    String dbPinCode = documentSnapshot.getString("pinCode");
-                    String dbCity = documentSnapshot.getString("city");
-                    String dbState = documentSnapshot.getString("state");
-                    if (dbShopNo.equals("")){
+                    String dbAddress = documentSnapshot.getString("address");
+                    if (dbAddress.equals("")){
                         mAddress.setText("Please Add Your Address");
                     }else {
-
-                        if (dbLandMark.equals("")){
-                            mAddress.setText(dbShopNo+", "+dbLocation+", "+dbCity+", "+dbState+" - "+dbPinCode);
-                        }else {
-                            mAddress.setText(dbShopNo+", "+dbLocation+" ("+dbLandMark+"), "+dbCity+", "+dbState+" - "+dbPinCode);
-
-                        }
-
+                        mAddress.setText(dbAddress);
                     }
 
                     //----------General Information Section--------------
@@ -427,13 +496,153 @@ public class Fragment_Account extends Fragment {
             @Override
             public void onClick(View view) {
 
-                mAuth.signOut();
-                Intent intent = new Intent(getActivity(),StartActivity.class);
-                startActivity(intent);
-                getActivity().finish();
+                // 1. Instantiate an AlertDialog.Builder with its constructor
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                // 2. Chain together various setter methods to set the dialog characteristics
+                builder.setMessage("Are you sure you want to logout?")
+                        .setTitle("Logout");
+
+                // 3. Add the buttons
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User clicked YES button
+
+                        mAuth.signOut();
+                        Intent intent = new Intent(getActivity(),StartActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                        dialog.cancel();
+
+                    }
+                });
+
+                // 4. Get the AlertDialog from create()
+                AlertDialog dialog = builder.create();
+                dialog.show();
 
             }
         });
+
+        mChangeImageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+//                Intent galleryIntent = new Intent();
+//                galleryIntent.setType("image/*");
+//                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+//
+//                startActivityForResult(Intent.createChooser(galleryIntent,"SELECT IMAGE"), GALLEY_PICK);
+
+                CropImage.activity()
+                        .setGuidelines(CropImageView.Guidelines.ON)
+                        .setAspectRatio(1,1)
+                        .start(getContext(),Fragment_Account.this);
+            }
+        });
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+
+                mMainProgress = new ProgressDialog(getContext());
+                mMainProgress.setTitle("Uploading Image");
+                mMainProgress.setMessage("Please wait while we upload the image");
+                mMainProgress.setCanceledOnTouchOutside(false);
+                mMainProgress.show();
+
+                Uri resultUri = result.getUri();
+
+                File thumb_filePath = new File(resultUri.getPath());
+
+
+                Bitmap thumb_bitmap = null;
+                try {
+                    thumb_bitmap = new Compressor(getContext())
+                                .setMaxHeight(250)
+                                .setMaxWidth(250)
+                                .setQuality(80)
+                                .compressToBitmap(thumb_filePath);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                thumb_bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                final byte[] thumb_byte = baos.toByteArray();
+
+                final StorageReference filepath = mImageStorage.child("restaurant_images").child(uid+".jpg");
+
+                UploadTask uploadTask = filepath.putBytes(thumb_byte);
+
+                filepath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+
+                        if (task.isSuccessful()){
+
+                            String downloadUrl = task.getResult().getDownloadUrl().toString();
+
+                            Map<String, Object> restaurant = new HashMap<>();
+                            restaurant.put("image", downloadUrl);
+
+                            DocumentReference mDocRef = FirebaseFirestore.getInstance().collection("restaurant").document(uid);
+
+                            mDocRef.update(restaurant).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    if(task.isSuccessful()){
+
+                                        mMainProgress.dismiss();
+
+                                        Fragment_Account fragment = new Fragment_Account();
+                                        FragmentManager manager = getFragmentManager();
+                                        FragmentTransaction transaction = manager.beginTransaction();
+                                        transaction.detach(fragment);
+                                        transaction.attach(fragment);
+                                        transaction.commit();
+
+                                        Toast.makeText(getActivity(),"Successfully uplodad the image",Toast.LENGTH_LONG).show();
+
+                                    }
+
+                                    else {
+
+                                        mMainProgress.dismiss();
+                                        Toast.makeText(getActivity(),task.getException().getMessage().toString(),Toast.LENGTH_LONG).show();
+
+                                    }
+
+                                }
+                            });
+
+                        }else {
+
+                            Toast.makeText(getActivity(),task.getException().getMessage().toString(),Toast.LENGTH_LONG).show();
+
+                        }
+
+                    }
+                });
+
+                //Toast.makeText(getActivity(),resultUri.toString(),Toast.LENGTH_LONG).show();
+
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+            }
+        }
 
     }
 }

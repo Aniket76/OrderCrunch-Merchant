@@ -145,9 +145,16 @@ public class Fragment_Address extends Fragment {
                 String picCode = mPinCode.getEditText().getText().toString();
                 String city = mCity.getEditText().getText().toString();
                 String state = mState.getEditText().getText().toString();
+                String address;
 
+                if (landmark.equals("")){
+                    address = shopNo+", "+location+", "+city+", "+shopNo+" - "+picCode;
+                }else {
+                    address = shopNo+", "+location+" ("+landmark+"), "+city+", "+state+" - "+picCode;
+                }
 
-                if (!TextUtils.isEmpty(shopNo) && !TextUtils.isEmpty(location) && !TextUtils.isEmpty(picCode) && !TextUtils.isEmpty(city) && !TextUtils.isEmpty(state)) {
+                if (!TextUtils.isEmpty(address))// && !TextUtils.isEmpty(location) && !TextUtils.isEmpty(picCode) && !TextUtils.isEmpty(city) && !TextUtils.isEmpty(state))
+                    {
 
                     mMainProgress.setTitle("Saving Data");
                     mMainProgress.setMessage("Please wait while we save the Data");
@@ -162,6 +169,7 @@ public class Fragment_Address extends Fragment {
                     restaurant.put("pinCode", picCode);
                     restaurant.put("city", city);
                     restaurant.put("state", state);
+                    restaurant.put("address", address);
 
                     mDocRef.update(restaurant).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

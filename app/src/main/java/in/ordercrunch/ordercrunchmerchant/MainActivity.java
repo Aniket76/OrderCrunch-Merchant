@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-    private Toolbar mToolbar;
+//    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        mToolbar = (Toolbar)findViewById(R.id.main_appBar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("OrderCrunch : )");
+//        mToolbar = (Toolbar)findViewById(R.id.main_appBar);
+//        setSupportActionBar(mToolbar);
+//        getSupportActionBar().setTitle("OrderCrunch : )");
 
     }
 

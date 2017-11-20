@@ -298,11 +298,24 @@
                     android:textColor="#9e9e9e"
                     android:textSize="10sp" />
 
+                <Switch
+                    android:id="@+id/details_veg_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/details_cuisines_txt"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Veg Restaurant    "
+                    android:textSize="20sp"
+                    android:fontFamily="@font/josefinsans_regular"
+                    />
+
                 <TextView
                     android:id="@+id/details_servises_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/details_cuisines_txt"
+                    android:layout_below="@+id/details_veg_switch"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="20dp"
@@ -385,6 +398,8 @@
                     android:backgroundTint="@color/colorAccent"
                     android:text="Add Details"
                     android:textColor="#ffffff" />
+
+
 
             </RelativeLayout>
 

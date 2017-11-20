@@ -18,6 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -45,6 +46,8 @@ public class Fragment_RestaurantDetails extends Fragment {
     private ImageView mChangeNumber,mChangeEmail;
 
     private Button mDetailsBtn;
+
+    private Switch mVeg;
 
     private ProgressDialog mMainProgress;
     private FirebaseAuth mAuth;
@@ -86,6 +89,8 @@ public class Fragment_RestaurantDetails extends Fragment {
         mChangeNumber = (ImageView) getActivity().findViewById(R.id.details_changeNumber);
         mChangeEmail = (ImageView) getActivity().findViewById(R.id.details_changeEmail);
 
+        mVeg = (Switch) getActivity().findViewById(R.id.details_veg_switch);
+
         mDetailsBtn = (Button) getActivity().findViewById(R.id.btn_addDetails);
 
         mAuth = FirebaseAuth.getInstance();
@@ -123,6 +128,7 @@ public class Fragment_RestaurantDetails extends Fragment {
                     Boolean dbTakeAway = documentSnapshot.getBoolean("takeAway");
                     Boolean dbHomeDelivery = documentSnapshot.getBoolean("homeDelivery");
                     Boolean dbOnTheGo = documentSnapshot.getBoolean("onTheGo");
+                    Boolean dbOnlyVeg = documentSnapshot.getBoolean("onlyVeg");
 
                     mRestaurantName.getEditText().setText(dbName);
                     mTagLine.getEditText().setText(dbTagLine);
@@ -132,25 +138,30 @@ public class Fragment_RestaurantDetails extends Fragment {
                     mAlterPhoneNumber.getEditText().setText(dbAlterPhoneNumner);
                     mCuisines.getEditText().setText(dbcuisines);
 
-                    if (dbDineIn == true)
+                    if (dbDineIn)
                         mDineIn.setChecked(true);
                     else
                         mDineIn.setChecked(false);
 
-                    if (dbTakeAway == true)
+                    if (dbTakeAway)
                         mTakeAway.setChecked(true);
                     else
                         mTakeAway.setChecked(false);
 
-                    if (dbHomeDelivery == true)
+                    if (dbHomeDelivery)
                         mHomeDelivery.setChecked(true);
                     else
                         mHomeDelivery.setChecked(false);
 
-                    if (dbOnTheGo == true)
+                    if (dbOnTheGo)
                         mOnTheGo.setChecked(true);
                     else
                         mOnTheGo.setChecked(false);
+
+                    if (dbOnlyVeg)
+                        mVeg.setChecked(true);
+                    else
+                        mVeg.setChecked(false);
 
                 }
             }
@@ -239,6 +250,7 @@ public class Fragment_RestaurantDetails extends Fragment {
                 Boolean homeDelivery;
                 Boolean takeAway;
                 Boolean onTheGo;
+                Boolean onlyVeg;
 
                 if (mDineIn.isChecked())
                     dineIn = true;
@@ -259,6 +271,11 @@ public class Fragment_RestaurantDetails extends Fragment {
                     onTheGo = true;
                 else
                     onTheGo = false;
+
+                if (mVeg.isChecked())
+                    onlyVeg = true;
+                else
+                    onlyVeg = false;
 
                 if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(cuisines) && (dineIn || takeAway || homeDelivery || onTheGo))
                 {
@@ -281,6 +298,7 @@ public class Fragment_RestaurantDetails extends Fragment {
                     restaurant.put("takeAway", takeAway);
                     restaurant.put("homeDelivery", homeDelivery);
                     restaurant.put("onTheGo",onTheGo);
+                    restaurant.put("onlyVeg",onlyVeg);
 
                     mDocRef.update(restaurant).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
